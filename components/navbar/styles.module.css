@@ -27,6 +27,12 @@
   margin-right: 10px;
 }
 
+.mainNav .profile-icon {
+  margin-left: auto;
+  /* display: inline;
+  margin-right: 10px; */
+}
+
 .mainNav a {
   color: black;
   text-decoration: none;
@@ -36,3 +42,4 @@
   /* color: yellow; */
   text-decoration: underline;
 }
+
