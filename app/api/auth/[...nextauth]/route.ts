@@ -31,6 +31,8 @@ const handler = NextAuth({
         if (!createdUser) {
           return false;
         }
+        // TODO: Modify to redirect user if profile is not created (even an existing user may not have a profile)
+        return "/profile/create";
         return true;
       } catch (error) {
         console.log(error);
