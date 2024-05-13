@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "bootstrap": "^5.3.3",
+    "fuse.js": "^7.0.0",
     "next": "14.1.4",
     "react": "^18",
     "react-bootstrap": "^2.10.2",
