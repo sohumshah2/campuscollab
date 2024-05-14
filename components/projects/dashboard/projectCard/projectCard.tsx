@@ -31,16 +31,21 @@ const ProjectCard: React.FC<projectCardProps> = ({
       height: '450px',
       width: '300px',
       border: '1px solid #6A6A6A',
+      borderRadius: '5px'
       // position: 'relative',
     },
     projectTitle : {
       fontSize: '1.5em',
       padding: '2% 0% 2% 2%',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
     },
     projectDescription : {
       fontSize: '1.0em',
       padding: '2% 0% 2% 2%',
       height: '100px',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
     },
     // creatorAndLikesContainer: {
     //   backgroundColor: '#C7C7C7',
@@ -52,32 +57,50 @@ const ProjectCard: React.FC<projectCardProps> = ({
       display: 'flex',
       // position: 'absoloute',
       height: '50px',
+      borderBottomLeftRadius: '4px',
+      borderBottomRightRadius: '5px'
     },
     image: {
-      width: '300px',
+      width: '299px',
       height: '180px',
       objectFit: 'cover',
+      borderTopLeftRadius: '4px',
+      borderTopRightRadius: '5px',
+
     },
     tagsContainer: {
       display: 'flex',
       gap: '5px',
       flexWrap: 'wrap',
       padding: '2% 0% 2% 2%',
+      marginBottom: '5px'
     },
     creatorProfilePic: {
-      width: '35px',
-      height: '35px',
+      width: '30px',
+      height: '30px',
       objectFit: 'cover',
       borderRadius: '50%',
     },
+    moreCreators: {
+      width: '30px',
+      height: '30px',
+      borderRadius: '50%',
+      textAlign: 'center',
+      backgroundColor: '#F9C80E',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
     creatorsContainer: {
-      width: '50%',
+      width: '67%',
       padding: '2% 0% 2% 2%',
       display: 'flex',
-      gap: '2px'
+      gap: '2px',
+      alignItems: 'center'
+      
     },
     LikesContainer: {
-      width: '50%',
+      width: '33%',
       padding: '2% 0% 2% 2%',
       display: 'flex',
       gap: '15px',
@@ -85,11 +108,11 @@ const ProjectCard: React.FC<projectCardProps> = ({
     },
     LikeMesIcon: {
       marginRight: '3px',
+      marginLeft: 'auto',
     }
   }
-  // Set to void for now
-  const filterProjects = (userQuery: string): void => {
-    console.log(userQuery);
+  const visibleCreators = () => {
+    return creators.slice(0, 4);
   }
 
   return (
@@ -112,9 +135,14 @@ const ProjectCard: React.FC<projectCardProps> = ({
         {/* <div style={styles.creatorAndLikesContainer}> */}
           <footer className="creatorsAndLikesContainer" style={styles.cardFooter}>
             <div className="creatorsContainer" style={styles.creatorsContainer}>
-              {creators.map((creator, index) => (
+              {visibleCreators().map((creator, index) => (
                 <div key={index}><img style={styles.creatorProfilePic} src="https://t3.ftcdn.net/jpg/06/01/17/18/360_F_601171862_l7yZ0wujj8o2SowiKTUsfLEEx8KunYNd.jpg" alt="creator profile picture" /></div>
               ))}
+              { creators.length > 4 && (
+                <div className="more-creators" style={styles.moreCreators}>
+                  +{creators.length - 3}
+                </div>
+              )}
             </div>
             <div className="LikesContainer" style={styles.LikesContainer}>
                 <div><HeartFill style={styles.LikeMesIcon}/>{likes}</div>

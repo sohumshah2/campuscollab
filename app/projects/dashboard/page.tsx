@@ -2,8 +2,10 @@
 
 import Navbar from "@/components/navbar/navbar";
 import SearchBar from "@/components/searchBar/searchBar";
+import Logo from "@/components/logo/logo";
 import ProjectCard from "@/components/projects/dashboard/projectCard/projectCard";
 import Fuse from 'fuse.js';
+import { PlusCircleFill } from 'react-bootstrap-icons';
 
 
 import React, { useState } from "react";
@@ -11,21 +13,42 @@ import styles from "./styles.module.css";
 
 const page = () => {
   const [visibilityNoSearch, setVisibilityNoSearch] = useState('hidden');
-  const styles = {
-    projectCardsContainer : {
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'flex-start',
-      flexWrap: 'wrap',
-      gap: '30px',
-      padding: '30px',
-    },
+  const inlineStyles = {
+    // projectCardsContainer : {
+    //   display: 'flex',
+    //   justifyContent: 'space-between',
+    //   alignItems: 'flex-start',
+    //   flexWrap: 'wrap',
+    //   gap: '30px',
+    //   padding: '30px',
+    // },
     noSearchResults: {
-      padding: '10%',
+      // padding: '10%',
       visibility: visibilityNoSearch,
-      width: '100%',
-      textAlign: 'center',
-    }
+      // width: '100%',
+      // textAlign: 'center',
+    },
+    // dashLogoContainer: {
+    //   display: 'flex',
+    // },
+
+    // btnContainer: {
+    //   display: 'flex',
+    //   justifyContent: 'center',
+    //   alignItems: 'center',
+    //   width: '50%',
+    // },
+    // addProjectBtn: {
+    //   backgroundColor: '#F9C80E',
+    //   height: '60px',
+    //   width: '300px',
+    //   border: 'none',
+    //   fontSize: '1.5em',
+    // },
+    // plusIconSpan: {
+    //   marginRight: '100px',
+    // }
+
   };
 
 
@@ -36,14 +59,14 @@ const page = () => {
       projectName: 'COMP6080',
       description: 'Description of Project',
       tags: ['course', 'comp6080', 'hackathon', 'competition'],
-      creators: ['Bob', 'Charlie', 'SomeGuy'],
+      creators: ['Bob', 'Charlie', 'SomeGuy', 'Carl', 'Abbie'],
       likes: 10,
       messages: ['Hi', 'your project is cool'],
       imageUrl: "https://t3.ftcdn.net/jpg/06/01/17/18/360_F_601171862_l7yZ0wujj8o2SowiKTUsfLEEx8KunYNd.jpg",
     },
     {
       projectName: 'IMC Prosperity',
-      description: 'Description of Project 2',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vestibulum eros ullamcorper efficitur imperdiet. Aliquam fermentum eleifend arcu, et consequat massa mattis et. Maecenas nec est vitae massa lobortis sodales. Integer accumsan nibh sed eros egestas fermentum. Morbi at nunc et dui finibus commodo non a nisl. Mauris sit amet rhoncus leo, nec laoreet orci. Curabitur gravida mi eros, ut consequat sem lobortis vitae. Ut enim leo, tincidunt eu porta ut, finibus vitae sem. Sed libero augue, sodales eu aliquam sit amet, dapibus at tellus. Mauris aliquam ipsum sit amet pharetra iaculis. Duis ut mauris nec augue cursus ornare nec.',
       tags: ['events', 'comp6080', 'hackathon', 'competition'],
       creators: ['Bob', 'Charlie', 'SomeGuy'],
       likes: 10,
@@ -207,15 +230,30 @@ const page = () => {
   return (
     <>
       <Navbar/>
+      <div className={styles.dashLogoContainer} >
+        <Logo/>
+        <div className={styles.btnContainer}>
+          <a href='/projects/create'>
+            <button className={styles.addProjectBtn}>
+              <div className={styles.btnTextContainer}>
+                <span className={styles.plusIconSpan}>
+                  <PlusCircleFill/>
+                </span>
+                <div className={styles.addBtnText}>Add your project</div>
+              </div>
+            </button>
+          </a>
+        </div>
+      </div>
       <SearchBar filterSearch={filterProjects}/>
-      <div style={styles.projectCardsContainer}>
+      <div className={styles.projectCardsContainer} >
         {showProjects.map((project, index) => (
         <div key={index}>
           <ProjectCard projectName={project.projectName} description={project.description} imageUrl={project.imageUrl} tags={project.tags} likes={project.likes} numMessages={(project.messages).length} creators={project.creators}/>
         </div>
       ))}
       </div>
-      <div style={styles.noSearchResults}>
+      <div className={styles.noSearchResults} style={inlineStyles.noSearchResults}>
         Oh no! Looks like nothing came up from you search result. Try a simpler search.
       </div>
     </>
