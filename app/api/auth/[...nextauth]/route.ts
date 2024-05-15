@@ -1,7 +1,8 @@
 import { connectToDatabase } from "@/helpers/server-helpers";
 import prisma from "@/prisma";
-import NextAuth from "next-auth/next";
+import NextAuth, { getServerSession } from "next-auth/next";
 import GoogleProvider from "next-auth/providers/google";
+import jwt from "jsonwebtoken";
 
 const handler = NextAuth({
   providers: [
@@ -31,8 +32,6 @@ const handler = NextAuth({
         if (!createdUser) {
           return false;
         }
-        // TODO: Modify to redirect user if profile is not created (even an existing user may not have a profile)
-        return "/profile/create";
         return true;
       } catch (error) {
         console.log(error);
@@ -40,6 +39,33 @@ const handler = NextAuth({
       } finally {
         await prisma.$disconnect();
       }
+    },
+
+    // Create a JWT signing the user's email
+    async jwt({ token, user }) {
+      if (process.env.JWT_SECRET === undefined) {
+        throw new Error("JWT_SECRET is not defined");
+      }
+      if (user) {
+        const accessToken = jwt.sign(
+          { email: user.email },
+          process.env.JWT_SECRET,
+          { expiresIn: "1d" }
+        );
+        token = { accessToken };
+      }
+      return { ...token, ...user };
+      // This returned value is a new 'user' object
+      // It contains the user data in the previous user object e.g. email, but we also add the JWT
+      // It is passed as 'token' to the 'session' callback
+    },
+
+    // Add the user's JWT to the session
+    async session({ session, token }) {
+      // We update the session's user object with the passed in user object 'token', that contains the JWT
+      // The session object can be accessed in the client side with the useSession hook
+      session.user = token;
+      return session;
     },
   },
 });

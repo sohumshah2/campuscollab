@@ -17,4 +17,11 @@ model User {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   name String
   email String @unique
+  profileImageUrl            String?
+  fullName                   String?
+  username                   String? @unique
+  bio                        String?
+  university                 String?
+  course                     String?
+  selectedTechnologiesOptions String[]  @default([])
 }
