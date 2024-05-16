@@ -1,0 +1,12 @@
+.card {
+  height: 400px;
+  width: 300px;
+}
+
+.card .projectTitle {
+  font-size: 1.5em;
+}
+
+.card .projectDescription {
+  font-size: 1.0em,
+}

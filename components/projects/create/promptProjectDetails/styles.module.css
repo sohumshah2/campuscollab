@@ -1,0 +1,14 @@
+.inputField,
+.textareaField {
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.buttonField {
+  padding: 10px 20px;
+  margin-bottom: 10px;
+}
+
+.longDescription {
+  height: 300px;
+}

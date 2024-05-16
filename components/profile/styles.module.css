@@ -1,0 +1,30 @@
+.cardContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  width: 400px;
+  padding: 20px;
+  border: 1.5px solid #ccc;
+  border-radius: 5px;
+  background-color: #fafafa;
+  margin-top: 20px; /* Gap? */
+}
+
+.inputField,
+.textareaField {
+  padding: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.buttonField {
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.longDescription {
+  height: 150px;
+}
