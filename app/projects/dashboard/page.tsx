@@ -2,84 +2,259 @@
 
 import Navbar from "@/components/navbar/navbar";
 import SearchBar from "@/components/searchBar/searchBar";
+import Logo from "@/components/logo/logo";
 import ProjectCard from "@/components/projects/dashboard/projectCard/projectCard";
+import Fuse from 'fuse.js';
+import { PlusCircleFill } from 'react-bootstrap-icons';
 
 
 import React, { useState } from "react";
 import styles from "./styles.module.css";
 
 const page = () => {
-  
-  const styles = {
-    projectCardsContainer : {
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'flex-start',
-      flexWrap: 'wrap',
-      gap: '30px',
-      padding: '30px',
-    }
+  const [visibilityNoSearch, setVisibilityNoSearch] = useState('hidden');
+  const inlineStyles = {
+    // projectCardsContainer : {
+    //   display: 'flex',
+    //   justifyContent: 'space-between',
+    //   alignItems: 'flex-start',
+    //   flexWrap: 'wrap',
+    //   gap: '30px',
+    //   padding: '30px',
+    // },
+    noSearchResults: {
+      // padding: '10%',
+      visibility: visibilityNoSearch,
+      // width: '100%',
+      // textAlign: 'center',
+    },
+    // dashLogoContainer: {
+    //   display: 'flex',
+    // },
+
+    // btnContainer: {
+    //   display: 'flex',
+    //   justifyContent: 'center',
+    //   alignItems: 'center',
+    //   width: '50%',
+    // },
+    // addProjectBtn: {
+    //   backgroundColor: '#F9C80E',
+    //   height: '60px',
+    //   width: '300px',
+    //   border: 'none',
+    //   fontSize: '1.5em',
+    // },
+    // plusIconSpan: {
+    //   marginRight: '100px',
+    // }
+
   };
 
+
   // Sample Project Data. This is temp only. Data structure will change when decided
+  // should likes be a list like messages
   const projectsData = [
     {
-      projectName: 'Name of Project',
+      projectName: 'COMP6080',
       description: 'Description of Project',
-      tags: ['events', 'comp6080', 'hackathon', 'competition'],
-      creators: [],
+      tags: ['course', 'comp6080', 'hackathon', 'competition'],
+      creators: ['Bob', 'Charlie', 'SomeGuy', 'Carl', 'Abbie'],
       likes: 10,
-      messages: 5,
+      messages: ['Hi', 'your project is cool'],
       imageUrl: "https://t3.ftcdn.net/jpg/06/01/17/18/360_F_601171862_l7yZ0wujj8o2SowiKTUsfLEEx8KunYNd.jpg",
     },
     {
-      projectName: 'Name of Project 2 ',
-      description: 'Description of Project 2',
+      projectName: 'IMC Prosperity',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vestibulum eros ullamcorper efficitur imperdiet. Aliquam fermentum eleifend arcu, et consequat massa mattis et. Maecenas nec est vitae massa lobortis sodales. Integer accumsan nibh sed eros egestas fermentum. Morbi at nunc et dui finibus commodo non a nisl. Mauris sit amet rhoncus leo, nec laoreet orci. Curabitur gravida mi eros, ut consequat sem lobortis vitae. Ut enim leo, tincidunt eu porta ut, finibus vitae sem. Sed libero augue, sodales eu aliquam sit amet, dapibus at tellus. Mauris aliquam ipsum sit amet pharetra iaculis. Duis ut mauris nec augue cursus ornare nec.',
       tags: ['events', 'comp6080', 'hackathon', 'competition'],
-      creators: [],
+      creators: ['Bob', 'Charlie', 'SomeGuy'],
       likes: 10,
-      messages: 5,
+      messages: ['Hi', 'your project is cool'],
       imageUrl: "https://t3.ftcdn.net/jpg/06/01/17/18/360_F_601171862_l7yZ0wujj8o2SowiKTUsfLEEx8KunYNd.jpg",
 
     },
     {
-      projectName: 'Name of Project 2',
+      projectName: 'Mystery Planet',
       description: 'Description of Project 2',
       tags: ['events', 'comp6080', 'hackathon', 'competition'],
       creators: [],
       likes: 10,
-      messages: 5,
+      messages: ['Hi', 'your project is cool'],
       imageUrl: "https://t3.ftcdn.net/jpg/06/01/17/18/360_F_601171862_l7yZ0wujj8o2SowiKTUsfLEEx8KunYNd.jpg",
     },
     {
-      projectName: 'Name of Project 2',
+      projectName: 'UNIHACK 2024',
       description: 'Description of Project 2',
       tags: ['events', 'comp6080', 'hackathon', 'competition'],
-      creators: [],
+      creators: ['Bob', 'Charlie', 'SomeGuy'],
       likes: 10,
-      messages: 5,
+      messages: ['Hi', 'your project is cool'],
       imageUrl: "https://t3.ftcdn.net/jpg/06/01/17/18/360_F_601171862_l7yZ0wujj8o2SowiKTUsfLEEx8KunYNd.jpg",
     },
     {
-      projectName: 'Name of Project 2',
+      projectName: 'Team Moon',
       description: 'Description of Project 2',
       tags: ['events', 'comp6080', 'hackathon', 'competition'],
-      creators: [],
+      creators: ['Bob', 'Charlie', 'SomeGuy'],
       likes: 10,
-      messages: 5,
+      messages: ['Hi', 'your project is cool'],
+      imageUrl: "https://t3.ftcdn.net/jpg/06/01/17/18/360_F_601171862_l7yZ0wujj8o2SowiKTUsfLEEx8KunYNd.jpg",
+    },
+    {
+      projectName: 'COMP1511',
+      description: 'Description of Project 2',
+      tags: ['course', 'comp6080', 'hackathon', 'competition'],
+      creators: ['Charlie', 'SomeGuy', 'firstYear'],
+      likes: 10,
+      messages: ['Hi', 'your project is cool'],
+      imageUrl: "https://t3.ftcdn.net/jpg/06/01/17/18/360_F_601171862_l7yZ0wujj8o2SowiKTUsfLEEx8KunYNd.jpg",
+    },
+    {
+      projectName: 'SENG2011',
+      description: 'Description of Project 2',
+      tags: ['events', 'comp6080', 'hackathon', 'competition'],
+      creators: ['CoolGuy', 'Charlie', 'SomeGuy'],
+      likes: 10,
+      messages: ['Hi', 'your project is cool'],
+      imageUrl: "https://t3.ftcdn.net/jpg/06/01/17/18/360_F_601171862_l7yZ0wujj8o2SowiKTUsfLEEx8KunYNd.jpg",
+    },
+    {
+      projectName: 'SENG3011',
+      description: 'Description of Project 2',
+      tags: ['events', 'comp6080', 'hackathon', 'competition'],
+      creators: ['Bob', 'Charlie', 'SomeGuy'],
+      likes: 10,
+      messages: ['Hi', 'your project is cool'],
       imageUrl: "https://t3.ftcdn.net/jpg/06/01/17/18/360_F_601171862_l7yZ0wujj8o2SowiKTUsfLEEx8KunYNd.jpg",
     },
   ];
+
+  const [showProjects, setShowProjects] = useState(projectsData);
+
+  // Set to void for now
+  const filterProjects = (userQuery: string): void => {
+    const userQueryList = userQuery.split(',').map(query => query.trim());
+    console.log(userQueryList);
+    console.log(userQuery);
+
+    // At the moment, it will use the last valid project name for fuzzy search
+    let userQueryProjectName = '';
+    userQueryList.forEach(query => {
+      if (!/@|#/.test(query)) {
+        userQueryProjectName = query;
+      }
+    });
+
+    let queryTagsList: string[] = [];
+    let queryCreatorsList: string[] = [];
+
+    // Get all the tags in userquery
+    userQueryList.forEach(query => {
+        if (query.includes('#')) {
+          let removeHash = query.replace(/#/g, "");
+          queryTagsList.push(removeHash)
+        };
+    });
+
+    // Get all the users in userquery
+    userQueryList.forEach(query => {
+      if (query.includes('@')) {
+        let removeAt = query.replace(/@/g, "");
+        queryCreatorsList.push(removeAt);
+      };
+    });
+    console.log('taglist', queryTagsList);
+    console.log('usersList', queryCreatorsList);
+
+    console.log('userqueryProjectName', userQueryProjectName);
+    
+    let showFilteredResult = projectsData;
+    showFilteredResult = [];
+
+    if (userQueryProjectName.length > 0) {
+      // Using fuse for fuzzy search using project titles
+      const fuse = new Fuse(projectsData, {
+        keys: ['projectName'],
+      });
+      const fuzzyResult = fuse.search(userQueryProjectName);
+      showFilteredResult = fuzzyResult.map(obj => obj.item);
+    }
+    
+    // Set showFilteredResult to project Data if size is 0
+    if (showFilteredResult.length === 0) {
+      showFilteredResult = projectsData;
+    }
+    console.log('showfilteredresult', showFilteredResult);
+
+    
+    const filteredTagCreator = showFilteredResult.filter(project => {
+      let hasMatchingTag = queryTagsList.every(tag => project.tags.includes(tag));
+
+    
+      // Check if any creator matches the creator list
+      let hasMatchingCreator = queryCreatorsList.every(creator => project.creators.includes(creator));
+
+
+      // If tags list empty, set to true.
+      if (queryTagsList.length === 0) {
+        hasMatchingTag = true;
+      }
+
+      // If creator list is empty, set to true.
+      if (queryCreatorsList.length === 0) {
+        hasMatchingCreator = true;
+      }
+      console.log('project name', project.projectName, hasMatchingTag, hasMatchingCreator, hasMatchingTag && hasMatchingCreator)
+
+      // return true if tag and creator matches
+      return hasMatchingTag && hasMatchingCreator;
+    });
+
+
+
+
+    console.log(filteredTagCreator.length);
+    setShowProjects(filteredTagCreator);
+
+    if (filteredTagCreator.length > 0) {
+      
+      setVisibilityNoSearch('hidden');
+    } else {
+      setVisibilityNoSearch('visible');
+    }
+
+    // console.log(userQuery);
+    // console.log(result);
+  };
   return (
     <>
       <Navbar/>
-      <SearchBar/>
-      <div style={styles.projectCardsContainer}>
-        {projectsData.map((project, index) => (
+      <div className={styles.dashLogoContainer} >
+        <Logo/>
+        <div className={styles.btnContainer}>
+          <a href='/projects/create'>
+            <button className={styles.addProjectBtn}>
+              <div className={styles.btnTextContainer}>
+                <span className={styles.plusIconSpan}>
+                  <PlusCircleFill/>
+                </span>
+                <div className={styles.addBtnText}>Add your project</div>
+              </div>
+            </button>
+          </a>
+        </div>
+      </div>
+      <SearchBar filterSearch={filterProjects}/>
+      <div className={styles.projectCardsContainer} >
+        {showProjects.map((project, index) => (
         <div key={index}>
-          <ProjectCard projectName={project.projectName} description={project.description} imageUrl={project.imageUrl} tags={project.tags} />
+          <ProjectCard projectName={project.projectName} description={project.description} imageUrl={project.imageUrl} tags={project.tags} likes={project.likes} numMessages={(project.messages).length} creators={project.creators}/>
         </div>
       ))}
+      </div>
+      <div className={styles.noSearchResults} style={inlineStyles.noSearchResults}>
+        Oh no! Looks like nothing came up from you search result. Try a simpler search.
       </div>
     </>
   );

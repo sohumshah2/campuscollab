@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 // import styles from "./styles.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Search } from 'react-bootstrap-icons';
 
+interface searchBarProps {
+  filterSearch: () => void;
+}
 
-const SearchBar: React.FC = () => {
+const SearchBar: React.FC = ({ filterSearch }) => {
+  const [userQuery, setUserQuery] = useState('');
+  
+  const handleUserQuery = (query: string) => {
+    setUserQuery('query');
+    filterSearch(query);
+  }
+
   const styles = {
     searchBarContainer: {
       height: '50px',
@@ -34,7 +44,7 @@ const SearchBar: React.FC = () => {
     <>
       <div style={styles.searchBarContainer}>
           <span style={styles.searchIcon}><Search/></span>
-          <input style={styles.searchInputBar} type='text' placeholder='Search projects by keyword, #tag, @username, and more...'/>
+          <input style={styles.searchInputBar} type='text' placeholder='Search projects by keyword, #tag, @username, and more...' onChange={e => handleUserQuery(e.target.value)}/>
       </div>
     </>
   );
