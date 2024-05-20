@@ -6,51 +6,59 @@ import Logo from "@/components/logo/logo";
 import ProjectCard from "@/components/projects/dashboard/projectCard/projectCard";
 import Fuse from 'fuse.js';
 import { PlusCircleFill } from 'react-bootstrap-icons';
+import { useSearchParams } from "next/navigation";
 
 
-import React, { useState } from "react";
+
+import React, { useState, useEffect } from "react";
 import styles from "./styles.module.css";
+
+interface UserQuery {
+  title: string;
+  tags: Array<string>;
+  creators: Array<string>;
+}
+
+
 
 const page = () => {
   const [visibilityNoSearch, setVisibilityNoSearch] = useState('hidden');
   const inlineStyles = {
-    // projectCardsContainer : {
-    //   display: 'flex',
-    //   justifyContent: 'space-between',
-    //   alignItems: 'flex-start',
-    //   flexWrap: 'wrap',
-    //   gap: '30px',
-    //   padding: '30px',
-    // },
     noSearchResults: {
-      // padding: '10%',
       visibility: visibilityNoSearch,
-      // width: '100%',
-      // textAlign: 'center',
     },
-    // dashLogoContainer: {
-    //   display: 'flex',
-    // },
-
-    // btnContainer: {
-    //   display: 'flex',
-    //   justifyContent: 'center',
-    //   alignItems: 'center',
-    //   width: '50%',
-    // },
-    // addProjectBtn: {
-    //   backgroundColor: '#F9C80E',
-    //   height: '60px',
-    //   width: '300px',
-    //   border: 'none',
-    //   fontSize: '1.5em',
-    // },
-    // plusIconSpan: {
-    //   marginRight: '100px',
-    // }
-
   };
+  const params = useSearchParams();
 
+
+  // useEffect to filter projects based on query parameters when first reloaded.
+  useEffect(() => {
+    let userQueryObject: UserQuery = {
+      title: '',
+      tags: [],
+      creators: [],
+    };
+    const titleQuery = params.get("title");
+    if (titleQuery !== null) {
+      userQueryObject.title = titleQuery;
+    }
+    const tagsQuery = params.get("tags");
+    if (tagsQuery !== null) {
+      // userQueryObject.title = titleQuery;
+      const tagsArray: string[] = tagsQuery.split(" ");
+      userQueryObject.tags = tagsArray;
+    }
+
+    const creatorsQuery = params.get("creators");
+    if (creatorsQuery !== null) {
+      // userQueryObject.title = titleQuery;
+      const creatorsArray: string[] = creatorsQuery.split(" ");
+      userQueryObject.creators = creatorsArray;
+    }
+
+    filterProjectsParams(userQueryObject);
+    
+  }, []);
 
   // Sample Project Data. This is temp only. Data structure will change when decided
   // should likes be a list like messages
@@ -131,6 +139,62 @@ const page = () => {
   ];
 
   const [showProjects, setShowProjects] = useState(projectsData);
+
+  // This is a copy and paste of filter projects just taking in a different input. 
+  // I can probably make the code cleaner 
+  const filterProjectsParams = (userQuery: UserQuery): void => {    
+    let showFilteredResult = projectsData;
+    showFilteredResult = [];
+
+    if (userQuery.title.length > 0) {
+      // Using fuse for fuzzy search using project titles
+      const fuse = new Fuse(projectsData, {
+        keys: ['projectName'],
+      });
+      const fuzzyResult = fuse.search(userQuery.title);
+      showFilteredResult = fuzzyResult.map(obj => obj.item);
+    }
+    
+    // Set showFilteredResult to project Data if size is 0
+    if (showFilteredResult.length === 0) {
+      showFilteredResult = projectsData;
+    }
+    console.log('showfilteredresult', showFilteredResult);
+
+    
+    const filteredTagCreator = showFilteredResult.filter(project => {
+      let hasMatchingTag = userQuery.tags.every(tag => project.tags.includes(tag));
+
+    
+      // Check if any creator matches the creator list
+      let hasMatchingCreator = userQuery.creators.every(creator => project.creators.includes(creator));
+
+
+      // If tags list empty, set to true.
+      if (userQuery.tags.length === 0) {
+        hasMatchingTag = true;
+      }
+
+      // If creator list is empty, set to true.
+      if (userQuery.creators.length === 0) {
+        hasMatchingCreator = true;
+      }
+
+      // return true if tag and creator matches
+      return hasMatchingTag && hasMatchingCreator;
+    });
+
+    setShowProjects(filteredTagCreator);
+
+    if (filteredTagCreator.length > 0) {
+      
+      setVisibilityNoSearch('hidden');
+    } else {
+      setVisibilityNoSearch('visible');
+    }
+  };
+
+
 
   // Set to void for now
   const filterProjects = (userQuery: string): void => {
@@ -223,9 +287,6 @@ const page = () => {
     } else {
       setVisibilityNoSearch('visible');
     }
-
-    // console.log(userQuery);
-    // console.log(result);
   };
   return (
     <>

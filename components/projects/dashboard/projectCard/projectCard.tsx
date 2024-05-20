@@ -3,7 +3,8 @@ import React from "react";
 // import styles from "./styles.module.css";
 import Tag from "../tag/tag";
 import { HeartFill, ChatFill } from 'react-bootstrap-icons';
-import defaultProfilePic from './default_profile_pic.jpeg'
+import defaultProfilePic from './default_profile_pic.jpeg';
+
 
 
 interface projectCardProps {
@@ -25,6 +26,7 @@ const ProjectCard: React.FC<projectCardProps> = ({
   numMessages,
   creators,
 }) => {
+  // const router = useRouter();
   // Add hover effect on card when you get how CSS works !!!!
   const styles = {
     card: {
@@ -114,6 +116,7 @@ const ProjectCard: React.FC<projectCardProps> = ({
   const visibleCreators = () => {
     return creators.slice(0, 4);
   }
+  // There could be a possible bug if we have too many tags for the project card. i.e it will not look nice
 
   return (
     <>
@@ -127,12 +130,13 @@ const ProjectCard: React.FC<projectCardProps> = ({
         </div>
         <div className="tagsContainer" style={styles.tagsContainer}>
           {tags.map((tag, index) => (
-            <div key={index}>
-              <Tag tag={tag}/>
-            </div>
+            <a href={`/projects/dashboard?tags=${tag}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+              <div key={index} >
+                <Tag tag={tag}/>
+              </div>
+            </a>
           ))}
         </div>
-        {/* <div style={styles.creatorAndLikesContainer}> */}
           <footer className="creatorsAndLikesContainer" style={styles.cardFooter}>
             <div className="creatorsContainer" style={styles.creatorsContainer}>
               {visibleCreators().map((creator, index) => (
@@ -148,9 +152,7 @@ const ProjectCard: React.FC<projectCardProps> = ({
                 <div><HeartFill style={styles.LikeMesIcon}/>{likes}</div>
                 <div><ChatFill style={styles.LikeMesIcon}/>{numMessages}</div>
             </div>
-          </footer>
-        {/* </div> */}
-        
+          </footer>        
       </div>
     </>
   );
