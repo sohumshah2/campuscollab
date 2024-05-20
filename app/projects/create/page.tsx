@@ -13,6 +13,7 @@ const page = () => {
   const [imageUrl, setImageUrl] = useState(
     "https://t3.ftcdn.net/jpg/06/01/17/18/360_F_601171862_l7yZ0wujj8o2SowiKTUsfLEEx8KunYNd.jpg"
   );
+  const [selectedTeammates, setSelectedTeammates] = useState([]);
 
   const [longDescription, setLongDescription] = useState(`### About the project
 - This is a project about something.
@@ -37,6 +38,8 @@ const page = () => {
           setDescription={setDescription}
           imageUrl={imageUrl}
           setImageUrl={setImageUrl}
+          selectedTeammates={selectedTeammates}
+          setSelectedTeammates={setSelectedTeammates}
         />
       </div>
       <div className={styles.rightHalf}>
