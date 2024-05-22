@@ -2,6 +2,7 @@
 
 import { signIn, signOut, useSession } from "next-auth/react";
 import React, { useEffect } from "react";
+import { BoxArrowInRight, BoxArrowInLeft } from "react-bootstrap-icons";
 
 const SignInButton = () => {
   const { data: session, status } = useSession();
@@ -23,6 +24,8 @@ const SignInButton = () => {
         const data = await response.json();
         if (!data.username) {
           window.location.href = "/profile/edit";
+        } else {
+          localStorage.setItem("username", data.username);
         }
       };
       fetchProfileData();
@@ -31,17 +34,22 @@ const SignInButton = () => {
 
   const handleSignIn = async () => {
     await signIn("google");
+    // Update the username in localstorage
+    localStorage.setItem("username", session?.user?.username || "");
   };
 
   if (session && session.user) {
     return (
-      <div>
-        <p>{session.user.name}</p>
-        <button onClick={() => signOut()}>Sign out</button>
-      </div>
+      <BoxArrowInLeft title="Sign Out" onClick={() => signOut()}>
+        Sign out
+      </BoxArrowInLeft>
     );
   }
-  return <button onClick={handleSignIn}>Sign in</button>;
+  return (
+    <BoxArrowInRight title="Sign In" onClick={handleSignIn}>
+      Sign in
+    </BoxArrowInRight>
+  );
 };
 
 export default SignInButton;

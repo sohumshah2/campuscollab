@@ -53,6 +53,14 @@ const handler = NextAuth({
           { expiresIn: "1d" }
         );
         token = { accessToken };
+
+        // Check if the user has a username
+        const existingUser = await prisma.user.findUnique({
+          where: { email: user.email },
+        });
+        if (existingUser?.username) {
+          token.username = existingUser.username;
+        }
       }
       return { ...token, ...user };
       // This returned value is a new 'user' object

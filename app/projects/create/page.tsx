@@ -4,6 +4,7 @@ import PromptProjectDetails from "@/components/projects/create/promptProjectDeta
 import React, { useState } from "react";
 import styles from "./styles.module.css";
 import PreviewPage from "@/components/projects/create/previewPage/previewPage";
+import Navbar from "@/components/navbar/navbar";
 
 const page = () => {
   const [projectName, setProjectName] = useState("My Project");
@@ -27,35 +28,38 @@ const page = () => {
 - Email: someone@somedomain.com
 `);
   return (
-    <div className={styles.pageContainer}>
-      <div className={styles.leftHalf}>
-        <PromptProjectDetails
-          longDescription={longDescription}
-          setLongDescription={setLongDescription}
-          projectName={projectName}
-          setProjectName={setProjectName}
-          description={description}
-          setDescription={setDescription}
-          imageUrl={imageUrl}
-          setImageUrl={setImageUrl}
-          selectedTeammates={selectedTeammates}
-          setSelectedTeammates={setSelectedTeammates}
-        />
-      </div>
-      <div className={styles.rightHalf}>
-        <div className={styles.previewContainer}>
-          <h2>Preview</h2>
-          <div className={styles.previewContent}>
-            <PreviewPage
-              longDescription={longDescription}
-              projectName={projectName}
-              description={description}
-              imageUrl={imageUrl}
-            />
+    <>
+      <Navbar />
+      <div className={styles.pageContainer}>
+        <div className={styles.leftHalf}>
+          <PromptProjectDetails
+            longDescription={longDescription}
+            setLongDescription={setLongDescription}
+            projectName={projectName}
+            setProjectName={setProjectName}
+            description={description}
+            setDescription={setDescription}
+            imageUrl={imageUrl}
+            setImageUrl={setImageUrl}
+            selectedTeammates={selectedTeammates}
+            setSelectedTeammates={setSelectedTeammates}
+          />
+        </div>
+        <div className={styles.rightHalf}>
+          <div className={styles.previewContainer}>
+            <h2>Preview</h2>
+            <div className={styles.previewContent}>
+              <PreviewPage
+                longDescription={longDescription}
+                projectName={projectName}
+                description={description}
+                imageUrl={imageUrl}
+              />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

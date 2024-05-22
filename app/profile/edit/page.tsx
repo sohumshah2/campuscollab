@@ -7,6 +7,7 @@ import styles from "./styles.module.css";
 import Select from "react-select";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Navbar from "@/components/navbar/navbar";
 
 const UserProfile: React.FC = () => {
   const [fullName, setFullName] = useState("");
@@ -130,116 +131,122 @@ const UserProfile: React.FC = () => {
       return;
     }
     console.log("Profile saved successfully");
-
-    // Redirect to the profile page
-    router.push("/profile");
+    localStorage.setItem("username", username);
+    router.push(`/people/${username}`);
   };
 
   return (
-    <div className={styles.container}>
-      <h2>Set Up Your Profile</h2>
-      <img
-        src={
-          profileImageUrl ||
-          "https://images.pexels.com/photos/16984810/pexels-photo-16984810/free-photo-of-cute-giraffe-head.jpeg"
-        }
-        alt="Profile"
-        onError={(e) => {
-          e.target.onerror = null;
-          e.target.src =
-            "https://images.pexels.com/photos/16984810/pexels-photo-16984810/free-photo-of-cute-giraffe-head.jpeg";
-        }}
-        className={styles.profileImage}
-      />
-      <p></p>
+    <>
+      <Navbar />
+      <div className={styles.container}>
+        <h2>Set Up Your Profile</h2>
+        <img
+          src={
+            profileImageUrl ||
+            "https://images.pexels.com/photos/16984810/pexels-photo-16984810/free-photo-of-cute-giraffe-head.jpeg"
+          }
+          alt="Profile"
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src =
+              "https://images.pexels.com/photos/16984810/pexels-photo-16984810/free-photo-of-cute-giraffe-head.jpeg";
+          }}
+          className={styles.profileImage}
+        />
+        <p></p>
 
-      <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="profileImage">
-          <Form.Label>Profile Image URL</Form.Label>
-          <Form.Control
-            className={styles.inputField}
-            type="input"
-            placeholder="Enter image URL"
-            value={profileImageUrl}
-            onChange={(e) => setProfileImageUrl(e.target.value)}
-          />
-        </Form.Group>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group controlId="profileImage">
+            <Form.Label>Profile Image URL</Form.Label>
+            <Form.Control
+              className={styles.inputField}
+              type="input"
+              placeholder="Enter image URL"
+              value={profileImageUrl}
+              onChange={(e) => setProfileImageUrl(e.target.value)}
+            />
+          </Form.Group>
 
-        <Form.Group controlId="fullName">
-          <Form.Label>Full Name</Form.Label>
-          <Form.Control
-            className={styles.inputField}
-            type="text"
-            placeholder="Enter full name"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
-            required={true}
-          />
-        </Form.Group>
+          <Form.Group controlId="fullName">
+            <Form.Label>Full Name</Form.Label>
+            <Form.Control
+              className={styles.inputField}
+              type="text"
+              placeholder="Enter full name"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              required={true}
+            />
+          </Form.Group>
 
-        <Form.Group controlId="username">
-          <Form.Label>Username</Form.Label>
-          <Form.Control
-            className={styles.inputField}
-            type="text"
-            placeholder="Enter username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required={true}
-          />
-        </Form.Group>
+          <Form.Group controlId="username">
+            <Form.Label>Username</Form.Label>
+            <Form.Control
+              className={styles.inputField}
+              type="text"
+              placeholder="Enter username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required={true}
+            />
+          </Form.Group>
 
-        <Form.Group controlId="bio">
-          <Form.Label>Bio</Form.Label>
-          <Form.Control
-            className={styles.inputField}
-            as="input"
-            placeholder="Enter a brief description about yourself"
-            value={bio}
-            onChange={(e) => setBio(e.target.value)}
-            required={true}
-          />
-        </Form.Group>
+          <Form.Group controlId="bio">
+            <Form.Label>Bio</Form.Label>
+            <Form.Control
+              className={styles.inputField}
+              as="input"
+              placeholder="Enter a brief description about yourself"
+              value={bio}
+              onChange={(e) => setBio(e.target.value)}
+              required={true}
+            />
+          </Form.Group>
 
-        <Form.Group controlId="university">
-          <Form.Label>University</Form.Label>
-          <Form.Control
-            className={styles.inputField}
-            type="text"
-            placeholder="Enter university"
-            value={university}
-            onChange={(e) => setUniversity(e.target.value)}
-            required={true}
-          />
-        </Form.Group>
+          <Form.Group controlId="university">
+            <Form.Label>University</Form.Label>
+            <Form.Control
+              className={styles.inputField}
+              type="text"
+              placeholder="Enter university"
+              value={university}
+              onChange={(e) => setUniversity(e.target.value)}
+              required={true}
+            />
+          </Form.Group>
 
-        <Form.Group controlId="course">
-          <Form.Label>Course</Form.Label>
-          <Form.Control
-            className={styles.inputField}
-            type="text"
-            placeholder="Enter course"
-            value={course}
-            onChange={(e) => setCourse(e.target.value)}
-            required={true}
-          />
-        </Form.Group>
+          <Form.Group controlId="course">
+            <Form.Label>Course</Form.Label>
+            <Form.Control
+              className={styles.inputField}
+              type="text"
+              placeholder="Enter course"
+              value={course}
+              onChange={(e) => setCourse(e.target.value)}
+              required={true}
+            />
+          </Form.Group>
 
-        <Form.Group controlId="languagesTechnologies">
-          <Form.Label>Languages/Technologies Known</Form.Label>
-          <Select
-            isMulti
-            options={technologiesOptions}
-            value={selectedTechnologiesOptions}
-            onChange={handleSelectChange}
-          />
-        </Form.Group>
+          <Form.Group controlId="languagesTechnologies">
+            <Form.Label>Languages/Technologies Known</Form.Label>
+            <Select
+              isMulti
+              options={technologiesOptions}
+              value={selectedTechnologiesOptions}
+              onChange={handleSelectChange}
+            />
+          </Form.Group>
 
-        <Button className={styles.buttonField} variant="primary" type="submit">
-          Save Profile
-        </Button>
-      </Form>
-    </div>
+          <Button
+            className={styles.buttonField}
+            variant="primary"
+            type="submit"
+          >
+            Save Profile
+          </Button>
+        </Form>
+      </div>
+    </>
   );
 };
 
