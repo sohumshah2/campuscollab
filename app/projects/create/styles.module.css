@@ -14,3 +14,10 @@
 .previewContainer {
   padding-top: 20px;
 }
+
+.searchBarContainer {
+  height: 30px;
+  border-width: 2px;
+  border-color: black;
+  border-style: solid none;
+}

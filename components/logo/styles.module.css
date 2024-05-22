@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+.preview {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  font-family: Montserrat;
+  font-weight: 500;
+}
+
+/* Navbar.css */
+.logoContainer {
+  font-family: Montserrat;
+  padding: 0%;
+  height: 130px;
+  position: relative;
+  padding: 2%;
+  width: 50%;
+}
+
+.moonPresents {
+  position: absolute;
+  top: 30px;
+  font-size: 0.8em;
+  font-weight: 300;
+}
+
+.campusCollabLogo {
+  font-weight: 700;
+  font-size: 2.5em;
+  position: absolute;
+  top: 35px;
+}
+
+.subtext {
+  font-weight: 600;
+  position: absolute;
+  top: 90px;
+}
+
+.campusText {
+  color: #F9C80E;
+}
+
+.collabText {
+  color: #EA3546;
+}
