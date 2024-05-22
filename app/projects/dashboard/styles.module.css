@@ -1,0 +1,56 @@
+.global {
+  margin: 0px;
+  padding: 0px;
+}
+
+.projectCardsContainer {
+  display: flex ;
+  justify-content: space-between;
+  align-items: flex-start;    
+  flex-wrap: wrap;
+  gap: 30px;
+  padding: 30px;
+};
+
+.noSearchResults {
+  padding: 10%;
+  width: 100%;
+  text-align: center;
+}
+
+.dashLogoContainer {
+  display: flex;
+}
+
+.btnContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+
+.btnTextContainer {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.addProjectBtn {
+  background-color: #F9C80E;
+  width: 300px;
+  height: 65px;
+  border: none;
+  font-size: 1.5em;
+  transition: background-color 0.3s ease;
+}
+
+/* .addBtnText {
+  margin-left: 0px;
+} */
+
+.addProjectBtn:hover {
+  background-color: #d9b407;
+} 
+
+/* .plusIconSpan {
+  margin-right: 5px,
+} */

@@ -9,16 +9,22 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "bootstrap": "^5.3.3",
+    "fuse.js": "^7.0.0",
+    "next": "14.1.4",
     "react": "^18",
+    "react-bootstrap": "^2.10.2",
+    "react-bootstrap-icons": "^1.11.4",
     "react-dom": "^18",
-    "next": "14.1.4"
+    "react-markdown": "^9.0.1",
+    "react-router-dom": "^6.23.1"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
-    "eslint-config-next": "14.1.4"
+    "eslint-config-next": "14.1.4",
+    "typescript": "^5"
   }
 }
