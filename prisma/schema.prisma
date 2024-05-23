@@ -25,3 +25,12 @@ model User {
   course                     String?
   selectedTechnologiesOptions String[]  @default([])
 }
+
+model Project {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  projectName                String?
+  description                String?
+  imageUrl                   String?
+  longDescription            String?
+  teammates                  String[] @default([])
+}

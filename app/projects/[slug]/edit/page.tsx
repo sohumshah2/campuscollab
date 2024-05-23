@@ -6,7 +6,7 @@ import styles from "./styles.module.css";
 import PreviewPage from "@/components/projects/create/previewPage/previewPage";
 import Navbar from "@/components/navbar/navbar";
 
-const page = () => {
+const page = ({ params }: { params: { slug: string } }) => {
   const [projectName, setProjectName] = useState("My Project");
   const [description, setDescription] = useState(
     "This is a project description."
@@ -27,6 +27,9 @@ const page = () => {
 - Discord: @someone
 - Email: someone@somedomain.com
 `);
+
+  console.log("params", params.slug);
+
   return (
     <>
       <Navbar />
