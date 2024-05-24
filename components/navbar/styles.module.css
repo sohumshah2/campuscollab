@@ -10,27 +10,37 @@
 
 /* Navbar.css */
 .mainNav {
-  background-color: #F9C80E;
+  background-color: #f9c80e;
   padding: 10px;
   width: 100%;
   font-family: Montserrat;
 }
 
-.mainNav ul {
+.navList {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
 
-.mainNav li {
-  display: inline;
+.leftSide {
+  display: flex;
+  align-items: center;
+}
+
+.leftSide li {
   margin-right: 10px;
 }
 
-.mainNav .profile-icon {
-  margin-left: auto;
-  /* display: inline;
-  margin-right: 10px; */
+.rightSide {
+  display: flex;
+  align-items: center;
+}
+
+.profileIcon {
+  margin-right: 10px;
 }
 
 .mainNav a {
@@ -39,7 +49,5 @@
 }
 
 .mainNav a:hover {
-  /* color: yellow; */
   text-decoration: underline;
 }
-
