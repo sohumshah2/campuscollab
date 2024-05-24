@@ -1,34 +1,42 @@
-/* teammate.css */
-
 .teammate-card {
+  background-color: #f0f0f0;
+  padding: 10px; /* Adjusted padding to make the card smaller */
+  margin-bottom: 10px;
+  border-radius: 10px;
   display: flex;
-  align-items: center;
-  padding: 16px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  margin-bottom: 16px;
-}
-
-.profile-icon-img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  overflow: hidden;
-  margin-right: 16px;
+  align-items: flex-start;
+  width: 90%; /* Adjusted to take full width */
 }
 
 .teammate-info {
   flex: 1;
 }
 
+.teammate-info h3 {
+  font-size: 20px;
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.teammate-info p {
+  font-size: 14px;
+  color: #333;
+  margin-top: 0;
+  margin-bottom: 10px; /* Increased margin for better spacing */
+}
+
 .skills {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  margin-top: 5px;
 }
 
 .skill {
-  background-color: #f0f0f0;
-  padding: 4px 8px;
-  border-radius: 4px;
+  padding: 5px 10px;
+  background-color: #F9C80E;
+  color: black;
+  border-radius: 20px;
+  margin-right: 5px;
+  font-size: 12px;
+  margin-bottom: 5px; /* Increased margin bottom for better spacing */
 }
