@@ -1,0 +1,22 @@
+.preview {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+}
+
+.contentContainer {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.teammatesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}

@@ -1,0 +1,12 @@
+.project-name-container {
+    text-align: left;
+    margin-bottom: 10px; 
+    margin-top: 0px;
+  }
+  
+  .project-name {
+    font-size: 25px;
+    color: #333;
+    margin: 2px;
+  }
+  

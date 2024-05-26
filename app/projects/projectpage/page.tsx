@@ -1,16 +1,23 @@
-// App.tsx
 import React from 'react';
-import Navbar from "@/components/navbar/navbar"; 
-import Image from "@/components/image/image"; 
-import TeammateCard from "@/components/teammate/teammate"; 
+import Navbar from "@/components/navbar/navbar";
+import Image from "@/components/image/image";
+import TeammateCard from "@/components/teammate/teammate";
+import ProjectName from "@/components/projectname/projectname";
+import './page.css';
 
 const App: React.FC = () => {
   return (
     <div className="preview">
       <Navbar />
       <div className="content-container">
-        <Image alt="projectimage" />
+        <div className="project-name-container">
+          <ProjectName name="Football Allstars" /> 
+          <div className="image-container">
+            <Image alt="projectimage" />
+          </div>
+        </div>
         <div className="teammates-grid">
+          <h2>Team:</h2> 
           <TeammateCard
             name="Neymar Dos Santos"
             description="Professional football player known for his dribbling skills."

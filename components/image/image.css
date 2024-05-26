@@ -2,20 +2,25 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-top: 20px;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .image-container {
   flex: 1;
   text-align: center;
+  padding: 0;
+  border: 0;
+  width: 127%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image covers the entire container */
 }
 
 .cornered-image {
+  display: block;
+  width: 100%; /* Ensures the image fills its container */
+  height: auto; /* Maintains aspect ratio */
   border-radius: 10px;
   overflow: hidden;
-  max-width: 95%;
-  height: auto;
-  margin-top: 10px;
 }
