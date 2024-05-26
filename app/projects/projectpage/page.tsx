@@ -11,13 +11,13 @@ const App: React.FC = () => {
       <Navbar />
       <div className="content-container">
         <div className="project-name-container">
-          <ProjectName name="Football Allstars" /> 
+          <ProjectName name="FOOTBALL ALLSTARS" /> 
           <div className="image-container">
             <Image alt="projectimage" />
           </div>
         </div>
         <div className="teammates-grid">
-          <h2>Team:</h2> 
+          <h2 className="team-header">TEAM:</h2> 
           <TeammateCard
             name="Neymar Dos Santos"
             description="Professional football player known for his dribbling skills."

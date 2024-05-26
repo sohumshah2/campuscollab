@@ -1,12 +1,20 @@
+@font-face {
+  font-family: 'Horizon';
+  src: url('/fonts/horizon.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .project-name-container {
-    text-align: left;
-    margin-bottom: 10px; 
-    margin-top: 0px;
-  }
-  
-  .project-name {
-    font-size: 25px;
-    color: #333;
-    margin: 2px;
-  }
-  
+  text-align: left;
+  margin-bottom: 10px;
+  margin-top: 0px;
+}
+
+.project-name {
+  font-size: 25px;
+  color: #333;
+  margin: 2px;
+  font-family: 'Horizon', sans-serif; /* Use the custom font here */
+  font-weight: bold; /* You can adjust the font weight as needed */
+}
