@@ -15,6 +15,6 @@
   font-size: 25px;
   color: #333;
   margin: 2px;
-  font-family: 'Horizon', sans-serif; /* Use the custom font here */
-  font-weight: bold; /* You can adjust the font weight as needed */
+  font-family: 'Horizon', sans-serif;
+  font-weight: bold; 
 }

@@ -14,13 +14,13 @@
   border: 0;
   width: 127%;
   height: 100%;
-  object-fit: cover; /* Ensures the image covers the entire container */
+  object-fit: cover; 
 }
 
 .cornered-image {
   display: block;
-  width: 100%; /* Ensures the image fills its container */
-  height: auto; /* Maintains aspect ratio */
+  width: 100%; 
+  height: auto; 
   border-radius: 10px;
   overflow: hidden;
 }
