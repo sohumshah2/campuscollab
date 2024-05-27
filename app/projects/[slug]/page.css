@@ -1,8 +1,8 @@
 /* page.css */
 
 @font-face {
-  font-family: 'Horizon';
-  src: url('/fonts/horizon.otf') format('opentype');
+  font-family: "Horizon";
+  src: url("/fonts/horizon.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
@@ -11,13 +11,13 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 500;
 }
 
-.contentContainer {
+.content-container {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
   margin-top: 20px;
   margin-left: 20px;
@@ -31,7 +31,7 @@
 }
 
 .team-header {
-  font-family: 'Horizon', sans-serif;
+  font-family: "Horizon", sans-serif;
   font-size: 27px;
   color: #333;
   font-weight: bold;
@@ -47,7 +47,7 @@
   border-radius: 10px;
   width: 100%;
   max-width: auto;
-  order: 3; 
+  order: 3;
 }
 
 .contentContainer {

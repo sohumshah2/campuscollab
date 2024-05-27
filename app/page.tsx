@@ -1,12 +1,14 @@
-import Link from "next/link";
-import styles from "./page.module.css";
+"use client";
+
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Home() {
-  return (
-    <main className={styles.main}>
-      <Link href="/projects/create">Go to /projects/create</Link>
-      <Link href="/projects/dashboard">Go to /projects/dashboard</Link>
+  const router = useRouter();
 
-    </main>
-  );
+  useEffect(() => {
+    router.push("/projects/dashboard");
+  }, []);
+
+  return null;
 }
