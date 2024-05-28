@@ -1,0 +1,28 @@
+.container {
+  padding: 20px;
+}
+
+.profileImage {
+  max-width: 300px;
+  max-height: 300px;
+}
+
+.inputField {
+  margin-bottom: 15px;
+}
+
+.buttonField {
+  margin-top: 15px;
+}
+
+.textareaField {
+  resize: none;
+}
+
+.longDescription {
+  height: auto;
+}
+
+.selectField {
+  height: auto;
+}

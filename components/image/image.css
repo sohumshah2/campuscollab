@@ -1,0 +1,26 @@
+.content-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.image-container {
+  flex: 1;
+  text-align: center;
+  padding: 0;
+  border: 0;
+  width: 127%;
+  height: 100%;
+  object-fit: cover; 
+}
+
+.cornered-image {
+  display: block;
+  width: 100%; 
+  height: auto; 
+  border-radius: 10px;
+  overflow: hidden;
+}
