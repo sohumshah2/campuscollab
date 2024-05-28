@@ -12,24 +12,7 @@ const App: React.FC = ({ params }: { params: { slug: string } }) => {
   const [projectName, setProjectName] = useState<string>("");
   const [projectDetails, setProjectDetails] = useState<string>("");
   const [projectImage, setProjectImage] = useState<string>("");
-  const [teammates, setTeammates] = useState<string[]>([]);
-
-  const descriptionContent = `
-## About This Project
-
-This project showcases the top football players around the world, including Neymar, Messi, and Ronaldo.
-
-### Features
-
-- Professional football players
-- Dribbling, speed, technique
-- Playmaking, precision
-- Heading and athleticism
-
-Enjoy exploring this project!
-
-**Football Allstars Team**
-  `;
+  const [teammates, setTeammates] = useState([]);
 
   const router = useRouter();
 
@@ -50,7 +33,30 @@ Enjoy exploring this project!
         setProjectName(data.projectName);
         setProjectDetails(data.longDescription);
         setProjectImage(data.imageUrl);
-        setTeammates(data.teammates);
+
+        // For each teammate, fetch the teammate details
+        data.teammates.forEach((teammateId: string) => {
+          fetch("/api/profile?username=" + teammateId)
+            .then((response) => {
+              if (response.ok) return response.json();
+              console.error("Error fetching teammate details:", response);
+            })
+            .then((data) => {
+              if (!data) return;
+              console.log("data", data);
+              console.log("profileImageUrl", data.profileImageUrl);
+              setTeammates((prevTeammates) => [
+                ...prevTeammates,
+                {
+                  name: data.name,
+                  description: data.bio,
+                  skills: data.selectedTechnologiesOptions,
+                  username: data.username,
+                  profileImageUrl: data.profileImageUrl,
+                },
+              ]);
+            });
+        });
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -69,21 +75,16 @@ Enjoy exploring this project!
         </div>
         <div className="teammates-grid">
           <h2 className="team-header">TEAM:</h2>
-          <TeammateCard
-            name="Neymar Dos Santos"
-            description="Professional football player known for his dribbling skills."
-            skills={["Dribbling", "Speed", "Technique"]}
-          />
-          <TeammateCard
-            name="Lionel Messi"
-            description="Argentine footballer widely regarded as one of the greatest players of all time."
-            skills={["Playmaking", "Precision"]}
-          />
-          <TeammateCard
-            name="Cristiano Ronaldo"
-            description="Portuguese footballer known for his goal-scoring ability and athleticism."
-            skills={["Heading"]}
-          />
+
+          {teammates.map((teammate) => (
+            <TeammateCard
+              name={teammate.name}
+              description={teammate.description}
+              skills={teammate.skills}
+              username={teammate.username}
+              profileImageUrl={teammate.profileImageUrl}
+            />
+          ))}
         </div>
       </div>
       <div className="description-container">
