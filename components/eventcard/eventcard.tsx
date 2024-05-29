@@ -19,7 +19,7 @@ const EventCard: React.FC<EventCardProps> = ({ title, description, imageUrl, for
         <h3>{title}</h3>
         <p>{description}</p>
         <a href={formUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
-          Interested
+        Register Your Interest Now !!!
         </a>
       </div>
     </div>
