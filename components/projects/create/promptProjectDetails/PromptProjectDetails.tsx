@@ -7,6 +7,9 @@ import axios from 'axios';
 import { useRouter } from "next/navigation";
 
 
+import TagsSelect from "./TagsSelect";
+
+
 interface PromptProjectDetailsProps {
   longDescription: string;
   setLongDescription: React.Dispatch<React.SetStateAction<string>>;
@@ -18,6 +21,8 @@ interface PromptProjectDetailsProps {
   setImageUrl: React.Dispatch<React.SetStateAction<string>>;
   selectedTeammates: any;
   setSelectedTeammates: any;
+  tags: any;
+  setTags: any;
 }
 
 const PromptProjectDetails: React.FC<PromptProjectDetailsProps> = ({
@@ -31,6 +36,8 @@ const PromptProjectDetails: React.FC<PromptProjectDetailsProps> = ({
   setImageUrl,
   selectedTeammates,
   setSelectedTeammates,
+  tags,
+  setTags,
 }) => {
   const router = useRouter();
 
@@ -59,26 +66,40 @@ const PromptProjectDetails: React.FC<PromptProjectDetailsProps> = ({
       imageUrl,
       longDescription,
       teammates: selectedTeammates.map((teammate) => teammate.value),
+      tags: tags.map((tag) => tag.value),
     });
   };
 
   const teammatesOptions = [
-    { value: 'sohumshah2', label: 'sohumshah2', imageUrl: 'https://images.rawpixel.com/image_png_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdjkzNy1hZXctMTM5LnBuZw.png' },
-    { value: 'hungryhippo', label: 'hungryhippo', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8SMSgLY1oyhq0pPR2O4ziMQxsBumRpw_l236G_K4KUA&s' },
+    {
+      value: "sohumshah2",
+      label: "sohumshah2",
+      imageUrl:
+        "https://images.rawpixel.com/image_png_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdjkzNy1hZXctMTM5LnBuZw.png",
+    },
+    {
+      value: "hungryhippo",
+      label: "hungryhippo",
+      imageUrl:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8SMSgLY1oyhq0pPR2O4ziMQxsBumRpw_l236G_K4KUA&s",
+    },
   ];
-    
-    // Handle the change event for the teammates select input
-    const handleSelectChange = (selectedOptions) => {
-      setSelectedTeammates(selectedOptions);
-    };
 
-    const formatOptionLabel = ({ label, imageUrl }) => (
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        <img src={imageUrl} alt={label} style={{ width: 30, height: 30, borderRadius: '50%', marginRight: 10 }} />
-        <span>{label}</span>
-      </div>
-    );
-    
+  // Handle the change event for the teammates select input
+  const handleSelectChange = (selectedOptions) => {
+    setSelectedTeammates(selectedOptions);
+  };
+
+  const formatOptionLabel = ({ label, imageUrl }) => (
+    <div style={{ display: "flex", alignItems: "center" }}>
+      <img
+        src={imageUrl}
+        alt={label}
+        style={{ width: 30, height: 30, borderRadius: "50%", marginRight: 10 }}
+      />
+      <span>{label}</span>
+    </div>
+  );
 
   return (
     <div>
@@ -135,15 +156,22 @@ const PromptProjectDetails: React.FC<PromptProjectDetailsProps> = ({
 
         <Form.Group controlId="collaborators">
           <Form.Label>Teammates</Form.Label>
-            <Select
-              isMulti
-              options={teammatesOptions}
-              formatOptionLabel={formatOptionLabel}
-              value={selectedTeammates}
-              onChange={handleSelectChange}
-            />
-         </Form.Group>
+          <Select
+            isMulti
+            options={teammatesOptions}
+            formatOptionLabel={formatOptionLabel}
+            value={selectedTeammates}
+            onChange={handleSelectChange}
+          />
+        </Form.Group>
 
+        <p></p>
+
+        <Form.Group controlId="tags">
+          <Form.Label>Tags</Form.Label>
+          <TagsSelect tags={tags} setTags={setTags} />
+        </Form.Group>
+        <p></p>
 
         <Button className={styles.buttonField} variant="primary" type="submit">
           Create Project
