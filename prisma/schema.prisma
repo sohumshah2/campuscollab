@@ -33,4 +33,5 @@ model Project {
   imageUrl                   String?
   longDescription            String?
   teammates                  String[] @default([])
+  tags                       String[] @default([])
 }
