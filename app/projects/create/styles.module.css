@@ -1,0 +1,23 @@
+.pageContainer {
+  display: flex;
+}
+
+.leftHalf {
+  width: 50%;
+  padding: 20px;
+}
+
+.rightHalf {
+  width: 50%;
+}
+
+.previewContainer {
+  padding-top: 20px;
+}
+
+.searchBarContainer {
+  height: 30px;
+  border-width: 2px;
+  border-color: black;
+  border-style: solid none;
+}

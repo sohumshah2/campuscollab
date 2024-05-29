@@ -3,6 +3,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Form, Button } from "react-bootstrap";
 import styles from "./styles.module.css";
 import Select from "react-select";
+import axios from 'axios';
+import { useRouter } from "next/navigation";
+
 
 interface PromptProjectDetailsProps {
   longDescription: string;
@@ -29,8 +32,27 @@ const PromptProjectDetails: React.FC<PromptProjectDetailsProps> = ({
   selectedTeammates,
   setSelectedTeammates,
 }) => {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+  const router = useRouter();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
+    console.log('selected', selectedTeammates);
+    const teamMatesList = selectedTeammates.map((teammate) => teammate.value);
+    try {
+      const response = await axios.post('/api/project/create', {
+        projectName,
+        description,
+        imageUrl,
+        longDescription,
+        teamMatesList,
+      });
+      console.log('Project created:', response.data);
+      router.push("/projects/dashboard");
+
+    } catch (error) {
+      console.error('Error creating project:', error);
+      alert('failed to create project');
+    }    
     console.log({
       projectName,
       description,
