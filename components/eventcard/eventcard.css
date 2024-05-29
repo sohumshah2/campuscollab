@@ -1,0 +1,59 @@
+.event-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 20px;
+}
+
+.event-card {
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  margin: 10px;
+  width: calc(25% - 20px); /* Adjusted to fit 4 cards in a row with margins */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* Ensures rounded corners are respected */
+}
+
+.event-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.event-content {
+  padding: 20px;
+}
+
+.event-content h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.5em;
+}
+
+.event-content p {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1em;
+  color: #333;
+}
+
+.event-content .btn {
+  margin-top: auto;
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  background-color: #F9C80E;
+  color: black;
+  text-decoration: none;
+  border: none;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.event-content .btn:hover {
+  background-color: #e0b343;
+}
+
