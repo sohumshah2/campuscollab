@@ -27,7 +27,7 @@ const page = () => {
 
   useEffect(() => {
     const fetchProjectsData = async () => {
-      const res = await fetch(`/api/project`);
+      const res = await fetch(`/api/project/dashboard`);
       if (!res.ok) {
         alert("Failed to get projects\n" + (await res.json()).message);
         return;
@@ -148,7 +148,7 @@ const page = () => {
   // Does the filter projects when user enters a query string in the search bar
   const filterProjects = (userQuery: string): void => {
     const fetchProjectsData = async () => {
-      const res = await fetch(`/api/project`);
+      const res = await fetch(`/api/project/dashboard`);
  
       const data = await res.json();
       
