@@ -19,6 +19,8 @@ const SearchBar: React.FC = ({ filterSearch }) => {
       // Check if the pressed key is Enter
       if (event.key === "Enter" && document.activeElement === inputRef.current) {
 
+        // Next time, This whole if else statement should be passed on from page
+        // so that component can reused by other pages i.e events and people pages
         // Check if input is not empty string. If empty string, then do nothing.
         if (inputRef.current.value !== '') {
           const userQuery: string = inputRef.current.value;
@@ -97,8 +99,8 @@ const SearchBar: React.FC = ({ filterSearch }) => {
         
         } else {
           // Resets the search when user enters nothing to search bar
-          filterSearch(inputRef.current.value);
-          setUserQuery(inputRef.current.value);
+          filterSearch('');
+          setUserQuery('');
           router.push("/projects/dashboard");
         }
       }

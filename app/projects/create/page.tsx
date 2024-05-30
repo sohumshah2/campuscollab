@@ -27,6 +27,8 @@ const Page = ({ params }: { params: { slug: string } }) => {
 - Discord: @someone
 - Email: someone@somedomain.com
 `);
+const [tags, setTags] = useState([]);
+
 
   console.log("params", params.slug);
 
@@ -46,6 +48,8 @@ const Page = ({ params }: { params: { slug: string } }) => {
             setImageUrl={setImageUrl}
             selectedTeammates={selectedTeammates}
             setSelectedTeammates={setSelectedTeammates}
+            tags={tags}
+            setTags={setTags}
           />
         </div>
         <div className={styles.rightHalf}>

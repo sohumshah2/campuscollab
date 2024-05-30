@@ -49,10 +49,11 @@ export async function POST(request: NextRequest) {
       description,
       longDescription,
       imageUrl,
-      selectedTeammates,
-      // tags,
+      selectedTeamMatesList,
+      selectedTagsList,
     } = await request.json();
-
+    // console.log('tags in route', tags);
+    // console.log('selected teammmates in route', selectedTeammates);
 
     // Add in Tags later
     if (
@@ -62,10 +63,12 @@ export async function POST(request: NextRequest) {
       // !selectedTeammates
     ) {
       return NextResponse.json(
-        { message: `Please fill in all required fields ${projectName}, ${description}, ${longDescription}, ${imageUrl}, ${selectedTeammates}` },
+        { message: `Please fill in all required fields ${projectName}, ${description}, ${longDescription}, ${imageUrl}, ${selectedTeamMatesList}` },
         { status: 400 }
       );
     }
+
+
 
     // // Check if an authorisation token was sent in the request
     // const token = request.headers.get("Authorization")?.replace("Bearer ", "");
@@ -83,25 +86,33 @@ export async function POST(request: NextRequest) {
     // }
 
     // Hardcoded tags for now
-    const tags = ['hardcodedTag'];
-    const hardCodedTeamMates = ['hardcoded user']
+    // const tags = ['hardcodedTag'];
+    // const hardCodedTeamMates = ['hardcoded user']
     const newProject = await prisma.project.create({
       data: {
         projectName: projectName,
         description: description,
         longDescription: longDescription,
         imageUrl: imageUrl,
-        teammates: hardCodedTeamMates,
-        tags: tags,
+        teammates: selectedTeamMatesList,
+        tags: selectedTagsList,
       },
     });
 
     if (!newProject) {
       return NextResponse.json(
-        { message: "Failed to create new project" },
+        { message: {
+          projectName: projectName,
+          description: description,
+          longDescription: longDescription,
+          imageUrl: imageUrl,
+          teammates: selectedTeamMatesList,
+          tags: selectedTagsList,
+        } },
         { status: 500 }
       );
     }
+    
 
     return NextResponse.json(
       { message: "Project created successfully" },
