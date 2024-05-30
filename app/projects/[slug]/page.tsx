@@ -76,8 +76,9 @@ const App: React.FC = ({ params }: { params: { slug: string } }) => {
         <div className="teammates-grid">
           <h2 className="team-header">TEAM:</h2>
 
-          {teammates.map((teammate) => (
+          {teammates.map((teammate, index) => (
             <TeammateCard
+              key={teammate.username || index}
               name={teammate.name}
               description={teammate.description}
               skills={teammate.skills}

@@ -15,7 +15,6 @@ const Page = ({ params }: { params: { slug: string } }) => {
     "https://t3.ftcdn.net/jpg/06/01/17/18/360_F_601171862_l7yZ0wujj8o2SowiKTUsfLEEx8KunYNd.jpg"
   );
   const [selectedTeammates, setSelectedTeammates] = useState([]);
-  const [tags, setTags] = useState([]);
 
   const [longDescription, setLongDescription] = useState(`### About the project
 - This is a project about something.
@@ -47,8 +46,6 @@ const Page = ({ params }: { params: { slug: string } }) => {
             setImageUrl={setImageUrl}
             selectedTeammates={selectedTeammates}
             setSelectedTeammates={setSelectedTeammates}
-            tags={tags}
-            setTags={setTags}
           />
         </div>
         <div className={styles.rightHalf}>
