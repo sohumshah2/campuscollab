@@ -17,14 +17,29 @@ interface UserQuery {
 }
 
 const Page = () => {
+  // Controls the display CSS of noSearchResult div and projectContainer
+  // Set to none if we want to make it hidden
+  // To display set to inline for noSearch and grid for project container. 
   const [displayNoSearch, setdisplayNoSearch] = useState("none");
+  const [displayProjectContainer, setdisplayProjectContainer] = useState("grid");
+
+  // Styles for the no search results and the projects container
   const inlineStyles = {
     noSearchResults: {
       display: displayNoSearch,
+      padding: '10%',
+      width: '100%',
+      textAlign: 'center',
+      fontSize: '1.5em',
+      
+    },
+    projectContainer: {
+      display: displayProjectContainer,
     },
   };
   const params = useSearchParams();
 
+  // Loads up projects initally based on query from url
   useEffect(() => {
     const fetchProjectsData = async () => {
       const res = await fetch(`/api/project/dashboard`);
@@ -60,6 +75,8 @@ const Page = () => {
     fetchProjectsData();
   }, []);
 
+  // Creates a user query type based on string input
+  // Used by filterProjects
   const createUserQuery = (queryString: string) => {
     let userQuery: UserQuery = {
       title: "",
@@ -92,8 +109,10 @@ const Page = () => {
     return userQuery;
   };
 
+  // State for projects to be shown based on user query
   const [showProjects, setShowProjects] = useState([]);
 
+  // Does all the filtering of projects by giving the user query and project data
   const filterProjectsParams = (userQuery: UserQuery, projectData): void => {
     let showFilteredResult = projectData;
     showFilteredResult = [];
@@ -133,16 +152,24 @@ const Page = () => {
       // return true if tag and creator matches
       return hasMatchingTag && hasMatchingCreator;
     });
+    
     setShowProjects(filteredTagCreator);
+    // If there are no projects to be show i.e filteredTagCreator === 0
+    // Then make noSearch appear and projectContainer disappear
+    // vice versa
     if (filteredTagCreator.length > 0) {
       setdisplayNoSearch("none");
+      setdisplayProjectContainer("grid");
     } else {
+      console.log('else trig', userQuery)
       setdisplayNoSearch("inline");
+      setdisplayProjectContainer("none");
     }
   };
 
   // Set to void for now
   // Does the filter projects when user enters a query string in the search bar
+  // Calls filter project params
   const filterProjects = (userQuery: string): void => {
     const fetchProjectsData = async () => {
       const res = await fetch(`/api/project/dashboard`);
@@ -150,11 +177,7 @@ const Page = () => {
       const data = await res.json();
 
       const userQueryObject = createUserQuery(userQuery);
-      if (userQuery === "") {
-        setShowProjects(data);
-      } else {
-        filterProjectsParams(userQueryObject, data);
-      }
+      filterProjectsParams(userQueryObject, data);
     };
 
     fetchProjectsData();
@@ -188,7 +211,10 @@ const Page = () => {
           width: "100%",
         }}
       >
-        <div className={styles.projectCardsContainer}>
+        <div 
+          className={styles.projectCardsContainer}
+          style={inlineStyles.projectContainer}
+        >
           {showProjects.map((project, index) => (
             <div key={index}>
               <ProjectCard
@@ -208,7 +234,7 @@ const Page = () => {
           className={styles.noSearchResults}
           style={inlineStyles.noSearchResults}
         >
-          Oh no! Looks like nothing came up from you search result. Try a
+          Oh no! Looks like nothing came up from your search result. Try a
           simpler search.
         </div>
       </div>

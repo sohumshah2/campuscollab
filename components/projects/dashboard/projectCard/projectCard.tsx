@@ -23,8 +23,7 @@ const ProjectCard: React.FC<projectCardProps> = ({
   creators,
   projectId,
 }) => {
-  // const router = useRouter();
-  // Add hover effect on card when you get how CSS works !!!!
+  // CSS for project Card
   const styles = {
     card: {
       height: "450px",
@@ -38,6 +37,7 @@ const ProjectCard: React.FC<projectCardProps> = ({
       padding: "2% 0% 2% 2%",
       overflow: "hidden",
       textOverflow: "ellipsis",
+      whiteSpace: 'nowrap',
     },
     projectDescription: {
       fontSize: "1.0em",
@@ -110,36 +110,40 @@ const ProjectCard: React.FC<projectCardProps> = ({
       marginLeft: "auto",
     },
   };
+  // {username: imageUrl}
+  // Contains an object of username -> key and imageUrl value
+  const [profileImages, setProfileImages] = useState({});
 
-  const [profileImages, setProfileImages] = useState([]);
-
+  // Returns creators that will be visible on the project card
+  // Rest will be a number i.e +2 if there are 2 that were not shown
   const visibleCreators = () => {
     if (creators === undefined || creators === null) {
       return [];
     }
-
+    // Currently max 7 creators will be shown
     return creators.slice(0, 7);
   };
 
+  // Fetch profiles based on creators/teammates string usernames
   useEffect(() => {
-    const fetchProfile = async (username: string) => {
-      const res = await fetch(`/api/profile?username=${username}`);
-
-      const data = await res.json();
-      return data;
-    };
-
-    const fetchProfiles = (usernames: Array<string>) => {
-      let imageUrls: Array<any> = [];
-      usernames.map((username) => {
-        fetchProfile(username).then((resp) => {
-          imageUrls.push(resp.profileImageUrl);
-        });
+    const fetchProfileImages = async () => {
+      const profileImagePromises = creators.map(async (username) => {
+        const response = await fetch(`/api/profile?username=${username}`);
+        const data = await response.json();
+        return { username, profileImage: data.profileImageUrl };
       });
-      return imageUrls;
+
+      const profileImagesArray: any = await Promise.all(profileImagePromises);
+      
+      const profileImagesMap = profileImagesArray.reduce((acc, { username, profileImage }) => {
+        acc[username] = profileImage;
+        return acc;
+      }, {});
+      setProfileImages(profileImagesMap);
     };
-    setProfileImages(fetchProfiles(creators));
-  }, []);
+
+    fetchProfileImages();
+  }, [creators]);
 
   return (
     <>
@@ -154,8 +158,7 @@ const ProjectCard: React.FC<projectCardProps> = ({
           </div>
           <div style={styles.projectDescription}>{description}</div>
           <div className="tagsContainer" style={styles.tagsContainer}>
-            {tags &&
-              tags.map((tag, index) => (
+            {tags && tags.map((tag, index) => (
                 <a
                   href={`/projects/dashboard?tags=${tag}`}
                   style={{ textDecoration: "none", color: "inherit" }}
@@ -181,7 +184,7 @@ const ProjectCard: React.FC<projectCardProps> = ({
                   <div key={index}>
                     <img
                       style={styles.creatorProfilePic}
-                      src={profileImages[index] || "/default_profile_pic2.jpeg"}
+                      src={profileImages[creator] || "/default_profile_pic2.jpeg"}
                       alt="creator profile picture"
                     />
                   </div>

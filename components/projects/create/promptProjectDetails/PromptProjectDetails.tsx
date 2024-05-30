@@ -44,14 +44,27 @@ const PromptProjectDetails: React.FC<PromptProjectDetailsProps> = ({
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     console.log('selected', selectedTeammates);
-    const teamMatesList = selectedTeammates.map((teammate) => teammate.value);
+    const selectedTeamMatesList = selectedTeammates.map((teammate) => teammate.value);
+    const selectedTagsList = tags.map((tag) => tag.value);
+
     try {
+      console.log('tags', selectedTagsList);
+      console.log('teammates', selectedTeamMatesList)
+      console.log({
+        projectName,
+        description,
+        imageUrl,
+        longDescription,
+        selectedTeamMatesList,
+        selectedTagsList,
+      });
       const response = await axios.post('/api/project/create', {
         projectName,
         description,
         imageUrl,
         longDescription,
-        teamMatesList,
+        selectedTeamMatesList,
+        selectedTagsList,
       });
       console.log('Project created:', response.data);
       router.push("/projects/dashboard");
