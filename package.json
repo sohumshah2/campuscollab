@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^5.14.0",
@@ -14,7 +15,7 @@
     "bootstrap": "^5.3.3",
     "fuse.js": "^7.0.0",
     "jsonwebtoken": "^9.0.2",
-    "next": "14.1.4",
+    "next": "^14.1.4",
     "next-auth": "^4.24.7",
     "react": "^18",
     "react-bootstrap": "^2.10.2",
