@@ -1,80 +1,78 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import Logo from "@/components/logo/logo";
 import Navbar from "@/components/navbar/navbar";
-import SearchBar from "@/components/searchBar/searchBar";
+import SearchBar from "@/components/peopleSearchBar/peopleSearchBar";
 
 const Page = () => {
-// Sample People data
-const peopleData = [
-  {
-    personName: 'James Liu',
-    description: 'I’m a full-stack developer, passionate about AI',
-    tags: ['HTML', 'CSS', 'Javascript'],
-    imageUrl: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
-  },
-  {
-    personName: 'Sam Peters',
-    description: 'Looking for strong team members! Experienced Dev',
-    tags: ['Java', 'C++', 'Haskell', 'Swift'],
-    imageUrl: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
-  },
-  {
-    personName: 'Mary Wang',
-    description: 'First year, just looking for a new experience!',
-    tags: ['Python', 'C'],
-    imageUrl: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
-  },
-];
+  const [peopleData, setPeopleData] = useState([]);
+  const [filteredPeople, setFilteredPeople] = useState([]);
 
-const [filteredPeople, setFilteredPeople] = useState(peopleData);
+  useEffect(() => {
+    const fetchPeople = async () => {
+      try {
+        const response = await fetch("/api/people");
+        if (!response.ok) {
+          throw new Error("Failed to fetch people");
+        }
+        const data = await response.json();
+        setPeopleData(data);
+        setFilteredPeople(data);
+      } catch (error) {
+        console.error("Error fetching people:", error);
+      }
+    };
+    fetchPeople();
+  }, []);
 
-const filterPeople = (query) => {
-  const queryList = query.split(',').map(q => q.trim());
-  
-  let filteredResults = peopleData.filter(person => {
-    const nameMatch = person.personName.toLowerCase().includes(query.toLowerCase());
-    const tagMatch = person.tags.some(tag => queryList.includes(`#${tag.toLowerCase()}`));
-    
-    return nameMatch || tagMatch;
-  });
+  const filterPeople = (query) => {
+    const queryList = query.split(',').map(q => q.trim().toLowerCase());
 
-  setFilteredPeople(filteredResults.length ? filteredResults : peopleData);
-};
+    const filteredResults = peopleData.filter(person => {
+      const nameMatch = person.name.toLowerCase().includes(query.toLowerCase());
+      const tagMatch = person.selectedTechnologiesOptions.some(selectedTechnologiesOptions => queryList.includes(`#${selectedTechnologiesOptions.toLowerCase()}`));
 
-return (
-  <div className={styles.pageContainer}>
-    <Navbar />
-    <Logo />
-    <SearchBar filterSearch={filterPeople} />
-    <div className={styles.peopleContainer}>
-      {filteredPeople.map((person, index) => (
-        <div key={index} className={styles.personContainer}>
-          <div className={styles.profileImageContainer}>
-            <img
-              src={person.imageUrl}
-              alt={person.personName}
-              className={styles.profileImage}
-            />
-          </div>
-          <div className={styles.personInfo}>
-            <h2>{person.personName}</h2>
-            <p>{person.description}</p>
-            <div className={styles.tagsContainer}>
-              {person.tags.map((tag, tagIndex) => (
-                <div key={tagIndex} className={styles.tag}>
-                  {tag}
-                </div>
-              ))}
+      return nameMatch || tagMatch;
+    });
+
+    setFilteredPeople(filteredResults.length ? filteredResults : peopleData);
+  };
+
+  return (
+    <div className={styles.pageContainer}>
+      <Navbar />
+      <Logo />
+      <SearchBar filterSearch={filterPeople} />
+      <div className={styles.peopleContainer}>
+        {filteredPeople.map((person, index) => (
+          <div key={index} className={styles.personContainer}>
+            <div className={styles.profileImageContainer}>
+              <a href={`/people/${person.username}`}>
+                <img
+                  src={person.profileImageUrl || "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"}
+                  alt={person.name}
+                  className={styles.profileImage}
+                />
+              </a>
+            </div>
+            <div className={styles.personInfo}>
+              <h2 className={styles.personName}>{person.name}</h2>
+              <p className={styles.personBio}>{person.bio}</p>
+              <div className={styles.tagsContainer}>
+                {person.selectedTechnologiesOptions.map((selectedTechnologiesOptions, tagIndex) => (
+                  <div key={tagIndex} className={styles.tag}>
+                    {selectedTechnologiesOptions}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
 };
 
 export default Page;
