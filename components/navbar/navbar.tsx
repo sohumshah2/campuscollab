@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 import styles from "./styles.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { PersonCircle } from "react-bootstrap-icons";
+import { PersonCircle, PencilSquare } from "react-bootstrap-icons";
 import SignInButton from "../signin/SignInButton";
 
 const Navbar: React.FC = () => {
@@ -36,6 +36,14 @@ const Navbar: React.FC = () => {
           <li className={styles.profileIcon}>
             <a href={`/people/${username}`}>
               <PersonCircle title="Profile" />
+            </a>
+          </li>
+          <li>
+            <a href="/profile/edit">
+              <PencilSquare
+                title="Edit Profile"
+                style={{ marginRight: "10px" }}
+              />
             </a>
           </li>
           <li>
