@@ -1,88 +1,31 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "@/components/navbar/navbar";
 import SearchBar from "@/components/searchBar/searchBar";
 import Logo from "@/components/logo/logo";
 import EventCard from "@/components/eventcard/eventcard";
-import "./page.css"; 
-
-const events = [
-  {
-    title: "Event Title 1",
-    description: "If you want to meet computer science nerds who haven't touched grass in months, come to this hackathon.",
-    imageUrl: "/projectimage.jpg", 
-    formUrl: "https://docs.google.com/forms",
-  },
-  {
-    title: "Event Title 2",
-    description: "If you want to meet computer science nerds who haven't touched grass in months, come to this hackathon.",
-    imageUrl: "/projectimage.jpg", 
-    formUrl: "https://docs.google.com/forms",
-  },
-  {
-    title: "Event Title 3",
-    description: "If you want to meet computer science nerds who haven't touched grass in months, come to this hackathon.",
-    imageUrl: "/projectimage.jpg", 
-    formUrl: "https://docs.google.com/forms",
-  },
-  {
-    title: "Event Title 4",
-    description: "If you want to meet computer science nerds who haven't touched grass in months, come to this hackathon.",
-    imageUrl: "/projectimage.jpg", 
-    formUrl: "https://docs.google.com/forms",
-  },
-  {
-    title: "Event Title 5",
-    description: "If you want to meet computer science nerds who haven't touched grass in months, come to this hackathon.",
-    imageUrl: "/projectimage.jpg", 
-    formUrl: "https://docs.google.com/forms",
-  },
-  {
-    title: "Event Title 6",
-    description: "If you want to meet computer science nerds who haven't touched grass in months, come to this hackathon.",
-    imageUrl: "/projectimage.jpg", 
-    formUrl: "https://docs.google.com/forms",
-  },
-  {
-    title: "Event Title 7",
-    description: "If you want to meet computer science nerds who haven't touched grass in months, come to this hackathon.",
-    imageUrl: "/projectimage.jpg", 
-    formUrl: "https://docs.google.com/forms",
-  },
-  {
-    title: "Event Title 8",
-    description: "If you want to meet computer science nerds who haven't touched grass in months, come to this hackathon.",
-    imageUrl: "/projectimage.jpg", 
-    formUrl: "https://docs.google.com/forms",
-  },
-  {
-    title: "Event Title 9",
-    description: "If you want to meet computer science nerds who haven't touched grass in months, come to this hackathon.",
-    imageUrl: "/projectimage.jpg", 
-    formUrl: "https://docs.google.com/forms",
-  },
-  {
-    title: "Event Title 10",
-    description: "If you want to meet computer science nerds who haven't touched grass in months, come to this hackathon.",
-    imageUrl: "/projectimage.jpg", 
-    formUrl: "https://docs.google.com/forms",
-  },
-  {
-    title: "Event Title 11",
-    description: "If you want to meet computer science nerds who haven't touched grass in months, come to this hackathon.",
-    imageUrl: "/projectimage.jpg", 
-    formUrl: "https://docs.google.com/forms",
-  },
-  {
-    title: "Event Title 12",
-    description: "If you want to meet computer science nerds who haven't touched grass in months, come to this hackathon.",
-    imageUrl: "/projectimage.jpg", 
-    formUrl: "https://docs.google.com/forms",
-  },
-];
+import "./page.css";
 
 const Page: React.FC = () => {
+  const [events, setEvents] = useState([]);
+
+  // Fetch events from the database
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const response = await fetch("/api/events");
+        const data = await response.json();
+        // Update the events array with the fetched data
+        setEvents(data);
+      } catch (error) {
+        console.error("Error fetching events:", error);
+      }
+    };
+
+    fetchEvents();
+  }, []);
+
   return (
     <div>
       <Navbar />
@@ -98,6 +41,7 @@ const Page: React.FC = () => {
             description={event.description}
             imageUrl={event.imageUrl}
             formUrl={event.formUrl}
+            eventId={event.id}
           />
         ))}
       </div>

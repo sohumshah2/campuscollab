@@ -1,17 +1,20 @@
 import React from 'react';
 import Image from 'next/image';
-import './EventCard.css';
+import './eventcard.css';
+import Link from 'next/link';
 
 interface EventCardProps {
   title: string;
   description: string;
   imageUrl: string;
   formUrl: string;
+  eventId: string;
 }
 
-const EventCard: React.FC<EventCardProps> = ({ title, description, imageUrl, formUrl }) => {
+const EventCard: React.FC<EventCardProps> = ({ title, description, imageUrl, formUrl, eventId }) => {
   return (
     <div className="event-card">
+      <Link href={`/events/${eventId}`} style={{ textDecoration: "none" }}>
       <div className="event-image">
         <Image src={imageUrl} alt="Event Image" width={600} height={400} />
       </div>
@@ -22,6 +25,7 @@ const EventCard: React.FC<EventCardProps> = ({ title, description, imageUrl, for
         Register Your Interest Now !!!
         </a>
       </div>
+      </Link>
     </div>
   );
 };
