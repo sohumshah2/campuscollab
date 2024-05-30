@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import Tag from "../tag/tag";
 import { HeartFill, ChatFill } from "react-bootstrap-icons";
 
-
 interface projectCardProps {
   projectName: string;
   description: string;
@@ -22,7 +21,7 @@ const ProjectCard: React.FC<projectCardProps> = ({
   // likes,
   // numMessages,
   creators,
-  projectId
+  projectId,
 }) => {
   // const router = useRouter();
   // Add hover effect on card when you get how CSS works !!!!
@@ -59,7 +58,7 @@ const ProjectCard: React.FC<projectCardProps> = ({
       height: "50px",
       borderBottomLeftRadius: "4px",
       borderBottomRightRadius: "5px",
-      marginTop: 'auto',
+      marginTop: "auto",
     },
     image: {
       width: "299px",
@@ -74,7 +73,7 @@ const ProjectCard: React.FC<projectCardProps> = ({
       flexWrap: "wrap",
       padding: "2% 2% 2% 2%",
       marginBottom: "5px",
-      height: '68.91px'
+      height: "68.91px",
     },
     creatorProfilePic: {
       width: "30px",
@@ -113,63 +112,65 @@ const ProjectCard: React.FC<projectCardProps> = ({
   };
 
   const [profileImages, setProfileImages] = useState([]);
- 
+
   const visibleCreators = () => {
-    if (creators === undefined ||  creators === null) {
+    if (creators === undefined || creators === null) {
       return [];
     }
 
     return creators.slice(0, 7);
   };
 
-
   useEffect(() => {
     const fetchProfile = async (username: string) => {
       const res = await fetch(`/api/profile?username=${username}`);
-  
+
       const data = await res.json();
       return data;
-    
     };
-  
+
     const fetchProfiles = (usernames: Array<string>) => {
       let imageUrls: Array<any> = [];
       usernames.map((username) => {
         fetchProfile(username).then((resp) => {
           imageUrls.push(resp.profileImageUrl);
         });
-      })
-        return imageUrls;
-      }
-      setProfileImages(fetchProfiles(creators));
-    }, []);
+      });
+      return imageUrls;
+    };
+    setProfileImages(fetchProfiles(creators));
+  }, []);
 
   return (
     <>
       <div className="card" style={styles.card}>
-      <a
-        href={`/projects/${projectId}`}
-        style={{ textDecoration: "none", color: "inherit" }}
-      >
+        <a
+          href={`/projects/${projectId}`}
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
           <img src={imageUrl} alt="project image" style={styles.image} />
           <div className="projectTitle" style={styles.projectTitle}>
             {projectName}
           </div>
           <div style={styles.projectDescription}>{description}</div>
           <div className="tagsContainer" style={styles.tagsContainer}>
-            {tags.map((tag, index) => (
-              <a
-                href={`/projects/dashboard?tags=${tag}`}
-                style={{ textDecoration: "none", color: "inherit" }}
-                key={index}
-              >
-                <div key={index}>
-                  <Tag tag={tag} />
-                </div>
-              </a>
-            ))}
+            {tags &&
+              tags.map((tag, index) => (
+                <a
+                  href={`/projects/dashboard?tags=${tag}`}
+                  style={{ textDecoration: "none", color: "inherit" }}
+                  key={index}
+                >
+                  <div key={index}>
+                    <Tag tag={tag} />
+                  </div>
+                </a>
+              ))}
           </div>
-          <footer className="creatorsAndLikesContainer" style={styles.cardFooter}>
+          <footer
+            className="creatorsAndLikesContainer"
+            style={styles.cardFooter}
+          >
             <div className="creatorsContainer" style={styles.creatorsContainer}>
               {visibleCreators().map((creator, index) => (
                 <a
@@ -177,16 +178,16 @@ const ProjectCard: React.FC<projectCardProps> = ({
                   style={{ textDecoration: "none", color: "inherit" }}
                   key={index}
                 >
-                <div key={index}>
-                  <img
-                    style={styles.creatorProfilePic}
-                    src={profileImages[index] || '/default_profile_pic2.jpeg'}
-                    alt="creator profile picture"
-                  />
-                </div>
+                  <div key={index}>
+                    <img
+                      style={styles.creatorProfilePic}
+                      src={profileImages[index] || "/default_profile_pic2.jpeg"}
+                      alt="creator profile picture"
+                    />
+                  </div>
                 </a>
               ))}
-              {creators.length > 7  && (
+              {creators.length > 7 && (
                 <div className="more-creators" style={styles.moreCreators}>
                   +{creators.length - 6}
                 </div>
