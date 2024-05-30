@@ -16,7 +16,7 @@ interface UserQuery {
   creators: Array<string>;
 }
 
-const page = () => {
+const Page = () => {
   const [displayNoSearch, setdisplayNoSearch] = useState("none");
   const inlineStyles = {
     noSearchResults: {
@@ -48,24 +48,23 @@ const page = () => {
         const tagsArray: string[] = tagsQuery.split(" ");
         userQueryObject.tags = tagsArray;
       }
-  
+
       const creatorsQuery = params.get("creators");
       if (creatorsQuery !== null) {
         const creatorsArray: string[] = creatorsQuery.split(" ");
         userQueryObject.creators = creatorsArray;
       }
-  
-      filterProjectsParams(userQueryObject ,data);
+
+      filterProjectsParams(userQueryObject, data);
     };
     fetchProjectsData();
-    
   }, []);
 
   const createUserQuery = (queryString: string) => {
     let userQuery: UserQuery = {
-      title: '',
+      title: "",
       tags: [],
-      creators: []
+      creators: [],
     };
     const userQueryList = queryString.split(",").map((query) => query.trim());
     userQueryList.forEach((query) => {
@@ -91,9 +90,8 @@ const page = () => {
     });
 
     return userQuery;
+  };
 
-  }
-  
   const [showProjects, setShowProjects] = useState([]);
 
   const filterProjectsParams = (userQuery: UserQuery, projectData): void => {
@@ -143,25 +141,23 @@ const page = () => {
     }
   };
 
-
   // Set to void for now
   // Does the filter projects when user enters a query string in the search bar
   const filterProjects = (userQuery: string): void => {
     const fetchProjectsData = async () => {
       const res = await fetch(`/api/project/dashboard`);
- 
+
       const data = await res.json();
-      
+
       const userQueryObject = createUserQuery(userQuery);
-      if (userQuery === '') {
+      if (userQuery === "") {
         setShowProjects(data);
       } else {
-        filterProjectsParams(userQueryObject,  data);
+        filterProjectsParams(userQueryObject, data);
       }
     };
-    
+
     fetchProjectsData();
-    
   };
   return (
     <>
@@ -182,7 +178,16 @@ const page = () => {
         </div>
       </div>
       <SearchBar filterSearch={filterProjects} />
-      <div className={styles.bodyContainer} style={{marginTop: '30px', display: 'grid', gridTemplateColumns: '1fr 80px', gap: '8px', width: '100%'}}>
+      <div
+        className={styles.bodyContainer}
+        style={{
+          marginTop: "30px",
+          display: "grid",
+          gridTemplateColumns: "1fr 80px",
+          gap: "8px",
+          width: "100%",
+        }}
+      >
         <div className={styles.projectCardsContainer}>
           {showProjects.map((project, index) => (
             <div key={index}>
@@ -196,19 +201,19 @@ const page = () => {
                 // numMessages={project.messages.length}
                 creators={project.teammates}
               />
-            </div>              
+            </div>
           ))}
         </div>
         <div
           className={styles.noSearchResults}
           style={inlineStyles.noSearchResults}
         >
-          Oh no! Looks like nothing came up from you search result. Try a simpler
-          search.
+          Oh no! Looks like nothing came up from you search result. Try a
+          simpler search.
         </div>
       </div>
     </>
   );
 };
 
-export default page;
+export default Page;

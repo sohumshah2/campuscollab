@@ -6,7 +6,7 @@ import styles from "./styles.module.css";
 import PreviewPage from "@/components/projects/create/previewPage/previewPage";
 import Navbar from "@/components/navbar/navbar";
 
-const page = ({ params }: { params: { slug: string } }) => {
+const Page = ({ params }: { params: { slug: string } }) => {
   const [projectName, setProjectName] = useState("My Project");
   const [description, setDescription] = useState(
     "This is a project description."
@@ -27,7 +27,6 @@ const page = ({ params }: { params: { slug: string } }) => {
 - Discord: @someone
 - Email: someone@somedomain.com
 `);
-
 
   console.log("params", params.slug);
 
@@ -67,4 +66,4 @@ const page = ({ params }: { params: { slug: string } }) => {
   );
 };
 
-export default page;
+export default Page;
