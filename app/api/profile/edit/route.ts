@@ -114,6 +114,26 @@ export async function POST(request: NextRequest) {
       },
     });
 
+    // If the username changed, update the username in the projects
+    if (user.username !== username) {
+      // Find all projects where the user is a teammate
+      const projects = await prisma.project.findMany({
+        where: { teammates: { has: user.username } },
+      });
+
+      // Update each project's teammates array
+      for (const project of projects) {
+        const updatedTeammates = project.teammates.map((teammate) =>
+          teammate === user.username ? username : teammate
+        );
+
+        await prisma.project.update({
+          where: { id: project.id },
+          data: { teammates: updatedTeammates },
+        });
+      }
+    }
+
     if (!updatedUser) {
       return NextResponse.json(
         { message: "Failed to update profile" },

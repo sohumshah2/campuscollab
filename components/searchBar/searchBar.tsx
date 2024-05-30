@@ -25,8 +25,7 @@ const SearchBar: React.FC = ({ filterSearch }) => {
 
 
           const userQueryList = userQuery.split(',').map(query => query.trim());
-          console.log(userQueryList);
-          console.log(userQuery);
+
 
           // At the moment, it will use the last valid project name for fuzzy search
           let userQueryProjectName = '';
@@ -96,8 +95,13 @@ const SearchBar: React.FC = ({ filterSearch }) => {
           filterSearch(inputRef.current.value);
           setUserQuery(inputRef.current.value);
         
+        } else {
+          // Resets the search when user enters nothing to search bar
+          filterSearch(inputRef.current.value);
+          setUserQuery(inputRef.current.value);
+          router.push("/projects/dashboard");
         }
-      };
+      }
     }
     // Add event listener for keydown event
     document.addEventListener("keydown", handleKeyDown);
@@ -108,12 +112,6 @@ const SearchBar: React.FC = ({ filterSearch }) => {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
-
-
-  const handleUserQuery = (query: string) => {
-    setUserQuery(query);
-    // filterSearch(query);
-  }
 
   const styles = {
     searchBarContainer: {
