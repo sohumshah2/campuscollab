@@ -35,3 +35,12 @@ model Project {
   teammates                  String[] @default([])
   tags                       String[] @default([])
 }
+
+model Event {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  eventName                String?
+  description                String?
+  imageUrl                   String?
+  longDescription            String?
+  tags                       String[] @default([])
+}

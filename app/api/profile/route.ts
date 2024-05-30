@@ -22,36 +22,11 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });
     }
 
-    // Add in some dummy project data
-    const projects = [
-      {
-        projectName: "Team Moon",
-        description: "A team project focused on lunar research.",
-        tags: ["events", "space", "moon", "research"],
-        creators: ["hungryhippo", "johndoe"],
-        likes: 10,
-        numMessages: 14,
-        imageUrl: "https://picsum.photos/200/300",
-      },
-      {
-        projectName: "Team Moon",
-        description: "A team project focused on lunar research.",
-        tags: ["events", "space", "moon", "research"],
-        creators: ["hungryhippo", "johndoe"],
-        likes: 10,
-        numMessages: 14,
-        imageUrl: "https://picsum.photos/200/300",
-      },
-      {
-        projectName: "Team Moon",
-        description: "A team project focused on lunar research.",
-        tags: ["events", "space", "moon", "research"],
-        creators: ["hungryhippo", "johndoe"],
-        likes: 10,
-        numMessages: 14,
-        imageUrl: "https://picsum.photos/200/300",
-      },
-    ];
+    // Grab the user's projects
+    // Find the projects where the usernaem is in the teammates array
+    const projects = await prisma.project.findMany({
+      where: { teammates: { has: username } },
+    });
 
     // Remove the email property from the user object
     const { id, email, ...userWithoutEmail } = user;

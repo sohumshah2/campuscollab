@@ -1,0 +1,55 @@
+/* page.css */
+
+@font-face {
+  font-family: "Horizon";
+  src: url("/fonts/horizon.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.preview {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+}
+
+.content-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.teammatesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.team-header {
+  font-family: "Horizon", sans-serif;
+  font-size: 27px;
+  color: #333;
+  font-weight: bold;
+  margin-top: 7px;
+  margin-left: 5px;
+}
+
+.description-container {
+  background-color: #f0f0f0;
+  padding: 27px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: auto;
+  order: 3;
+}
+
+.contentContainer {
+  overflow-y: auto;
+}
