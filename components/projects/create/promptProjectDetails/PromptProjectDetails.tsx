@@ -1,14 +1,12 @@
-import React from "react";
+import React, { use, useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Form, Button } from "react-bootstrap";
 import styles from "./styles.module.css";
 import Select from "react-select";
-import axios from 'axios';
+import axios from "axios";
 import { useRouter } from "next/navigation";
 
-
 import TagsSelect from "./TagsSelect";
-
 
 interface PromptProjectDetailsProps {
   longDescription: string;
@@ -43,14 +41,11 @@ const PromptProjectDetails: React.FC<PromptProjectDetailsProps> = ({
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    console.log('selected', selectedTeammates);
     const selectedTeamMatesList = selectedTeammates.map((teammate) => teammate.value);
     const selectedTagsList = tags.map((tag) => tag.value);
 
     try {
-      console.log('tags', selectedTagsList);
-      console.log('teammates', selectedTeamMatesList)
-      console.log({
+      const response = await axios.post("/api/project/create", {
         projectName,
         description,
         imageUrl,
@@ -58,21 +53,12 @@ const PromptProjectDetails: React.FC<PromptProjectDetailsProps> = ({
         selectedTeamMatesList,
         selectedTagsList,
       });
-      const response = await axios.post('/api/project/create', {
-        projectName,
-        description,
-        imageUrl,
-        longDescription,
-        selectedTeamMatesList,
-        selectedTagsList,
-      });
-      console.log('Project created:', response.data);
+      console.log("Project created:", response.data);
       router.push("/projects/dashboard");
-
     } catch (error) {
-      console.error('Error creating project:', error);
-      alert('failed to create project');
-    }    
+      console.error("Error creating project:", error);
+      alert("failed to create project");
+    }
     console.log({
       projectName,
       description,
@@ -83,20 +69,29 @@ const PromptProjectDetails: React.FC<PromptProjectDetailsProps> = ({
     });
   };
 
-  const teammatesOptions = [
-    {
-      value: "sohumshah2",
-      label: "sohumshah2",
-      imageUrl:
-        "https://images.rawpixel.com/image_png_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdjkzNy1hZXctMTM5LnBuZw.png",
-    },
-    {
-      value: "hungryhippo",
-      label: "hungryhippo",
-      imageUrl:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8SMSgLY1oyhq0pPR2O4ziMQxsBumRpw_l236G_K4KUA&s",
-    },
-  ];
+  const [teammatesOptions, setTeammatesOptions] = useState([]);
+
+  useEffect(() => {
+    const fetchPeople = async () => {
+      try {
+        const response = await fetch("/api/people");
+        if (!response.ok) {
+          throw new Error("Failed to fetch people");
+        }
+        const data = await response.json();
+        setTeammatesOptions(
+          data.map((person) => ({
+            value: person.username,
+            label: person.username,
+            imageUrl: person.profileImageUrl,
+          }))
+        );
+      } catch (error) {
+        console.error("Error fetching people:", error);
+      }
+    };
+    fetchPeople();
+  }, []);
 
   // Handle the change event for the teammates select input
   const handleSelectChange = (selectedOptions) => {

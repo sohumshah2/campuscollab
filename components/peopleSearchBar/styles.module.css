@@ -4,43 +4,33 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  /* font-family: Montserrat; */
+  font-family: Montserrat;
   font-weight: 500;
 }
 
 /* Navbar.css */
 .mainNav {
-  background-color: #f9c80e;
+  background-color: #F9C80E;
   padding: 10px;
   width: 100%;
-  /* font-family: Montserrat; */
+  font-family: Montserrat;
 }
 
-.navList {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.mainNav ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
 
-.leftSide {
-  display: flex;
-  align-items: center;
-}
-
-.leftSide li {
+.mainNav li {
+  display: inline;
   margin-right: 10px;
 }
 
-.rightSide {
-  display: flex;
-  align-items: center;
-}
-
-.profileIcon {
-  margin-right: 10px;
+.mainNav .profile-icon {
+  margin-left: auto;
+  /* display: inline;
+  margin-right: 10px; */
 }
 
 .mainNav a {
@@ -49,5 +39,6 @@
 }
 
 .mainNav a:hover {
+  /* color: yellow; */
   text-decoration: underline;
 }

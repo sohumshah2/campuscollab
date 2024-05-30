@@ -4,6 +4,6 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-weight: 500;
 }

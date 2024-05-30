@@ -5,6 +5,12 @@ import styles from "./styles.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { PersonCircle, PencilSquare } from "react-bootstrap-icons";
 import SignInButton from "../signin/SignInButton";
+import { Montserrat } from "next/font/google";
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weights: ["400", "700"],
+});
 
 const Navbar: React.FC = () => {
   // Get username from localstorage
@@ -16,7 +22,7 @@ const Navbar: React.FC = () => {
   }, []);
 
   return (
-    <nav className={styles.mainNav}>
+    <nav className={`${styles.mainNav} ${montserrat.className}`}>
       <ul className={styles.navList}>
         <div className={styles.leftSide}>
           <li>

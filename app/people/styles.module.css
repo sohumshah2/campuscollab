@@ -1,0 +1,70 @@
+.personContainer {
+  display: flex;
+  align-items: center;
+  background-color: #eeeee5;
+  padding: 20px;
+  border-radius: 10px;
+  transform: scale(0.8); /* Scale down everything to 80% */
+  transform-origin: top left;
+  margin-bottom: -10px;
+}
+
+.peopleContainer {
+  display: inline-flex;
+  flex-direction: column;
+  max-width: 800px; /* Adjust width */
+  width: 100%; /* Ensures container doesn't exceed the maximum width */
+  margin-left: 25px;
+}
+
+.personContainer {
+  display: flex;
+  align-items: center;
+  background-color: #eeeee5;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.profileImageContainer {
+  flex-shrink: 0;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 20px;
+}
+
+.profileImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.personInfo {
+  flex: 1;
+}
+
+.personName {
+  margin: 0;
+  font-size: 1.5em;
+}
+
+.personBio {
+  margin: 10px 0;
+  font-size: 1em;
+  color: #555;
+}
+
+.tagsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tag {
+  background-color: #F9C80E;
+  color: black;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.9em;
+}
