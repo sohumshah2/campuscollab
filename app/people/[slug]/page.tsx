@@ -87,7 +87,7 @@ const ProfilePage = ({ params }: { params: { slug: string } }) => {
                     tags={project.tags}
                     likes={project.likes}
                     numMessages={project.numMessages}
-                    creators={project.creators}
+                    creators={project.teammates}
                   />
                 </div>
               ))}

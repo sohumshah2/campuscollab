@@ -1,18 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // import ReactMarkdown from "react-markdown";
 // import styles from "./styles.module.css";
 import Tag from "../tag/tag";
 import { HeartFill, ChatFill } from "react-bootstrap-icons";
-import defaultProfilePic from "./default_profile_pic.jpeg";
 
 interface projectCardProps {
   projectName: string;
   description: string;
   imageUrl: string;
   tags: Array<string>;
-  likes: number;
-  numMessages: number;
-  creators: Array<string>;
+  creators: any;
+  projectId: any;
 }
 
 const ProjectCard: React.FC<projectCardProps> = ({
@@ -20,9 +18,10 @@ const ProjectCard: React.FC<projectCardProps> = ({
   description,
   imageUrl,
   tags,
-  likes,
-  numMessages,
+  // likes,
+  // numMessages,
   creators,
+  projectId,
 }) => {
   // const router = useRouter();
   // Add hover effect on card when you get how CSS works !!!!
@@ -59,6 +58,7 @@ const ProjectCard: React.FC<projectCardProps> = ({
       height: "50px",
       borderBottomLeftRadius: "4px",
       borderBottomRightRadius: "5px",
+      marginTop: "auto",
     },
     image: {
       width: "299px",
@@ -71,8 +71,9 @@ const ProjectCard: React.FC<projectCardProps> = ({
       display: "flex",
       gap: "5px",
       flexWrap: "wrap",
-      padding: "2% 0% 2% 2%",
+      padding: "2% 2% 2% 2%",
       marginBottom: "5px",
+      height: "68.91px",
     },
     creatorProfilePic: {
       width: "30px",
@@ -109,59 +110,91 @@ const ProjectCard: React.FC<projectCardProps> = ({
       marginLeft: "auto",
     },
   };
+
+  const [profileImages, setProfileImages] = useState([]);
+
   const visibleCreators = () => {
-    return creators.slice(0, 4);
+    if (creators === undefined || creators === null) {
+      return [];
+    }
+
+    return creators.slice(0, 7);
   };
-  // There could be a possible bug if we have too many tags for the project card. i.e it will not look nice
+
+  useEffect(() => {
+    const fetchProfile = async (username: string) => {
+      const res = await fetch(`/api/profile?username=${username}`);
+
+      const data = await res.json();
+      return data;
+    };
+
+    const fetchProfiles = (usernames: Array<string>) => {
+      let imageUrls: Array<any> = [];
+      usernames.map((username) => {
+        fetchProfile(username).then((resp) => {
+          imageUrls.push(resp.profileImageUrl);
+        });
+      });
+      return imageUrls;
+    };
+    setProfileImages(fetchProfiles(creators));
+  }, []);
 
   return (
     <>
       <div className="card" style={styles.card}>
-        <img src={imageUrl} alt="project image" style={styles.image} />
-        <div className="projectTitle" style={styles.projectTitle}>
-          {projectName}
-        </div>
-        <div style={styles.projectDescription}>{description}</div>
-        <div className="tagsContainer" style={styles.tagsContainer}>
-          {tags.map((tag, index) => (
-            <a
-              href={`/projects/dashboard?tags=${tag}`}
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
-              <div key={index}>
-                <Tag tag={tag} />
-              </div>
-            </a>
-          ))}
-        </div>
-        <footer className="creatorsAndLikesContainer" style={styles.cardFooter}>
-          <div className="creatorsContainer" style={styles.creatorsContainer}>
-            {visibleCreators().map((creator, index) => (
-              <div key={index}>
-                <img
-                  style={styles.creatorProfilePic}
-                  src="https://t3.ftcdn.net/jpg/06/01/17/18/360_F_601171862_l7yZ0wujj8o2SowiKTUsfLEEx8KunYNd.jpg"
-                  alt="creator profile picture"
-                />
-              </div>
-            ))}
-            {creators.length > 4 && (
-              <div className="more-creators" style={styles.moreCreators}>
-                +{creators.length - 3}
-              </div>
-            )}
+        <a
+          href={`/projects/${projectId}`}
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
+          <img src={imageUrl} alt="project image" style={styles.image} />
+          <div className="projectTitle" style={styles.projectTitle}>
+            {projectName}
           </div>
-          <div className="LikesContainer" style={styles.LikesContainer}>
-            <div>
-              <HeartFill style={styles.LikeMesIcon} />
-              {likes}
-            </div>
-            <div>
-              <ChatFill style={styles.LikeMesIcon} />
-              {numMessages}
-            </div>
+          <div style={styles.projectDescription}>{description}</div>
+          <div className="tagsContainer" style={styles.tagsContainer}>
+            {tags &&
+              tags.map((tag, index) => (
+                <a
+                  href={`/projects/dashboard?tags=${tag}`}
+                  style={{ textDecoration: "none", color: "inherit" }}
+                  key={index}
+                >
+                  <div key={index}>
+                    <Tag tag={tag} />
+                  </div>
+                </a>
+              ))}
           </div>
-        </footer>
+          <footer
+            className="creatorsAndLikesContainer"
+            style={styles.cardFooter}
+          >
+            <div className="creatorsContainer" style={styles.creatorsContainer}>
+              {visibleCreators().map((creator, index) => (
+                <a
+                  href={`/people/${creator}`}
+                  style={{ textDecoration: "none", color: "inherit" }}
+                  key={index}
+                >
+                  <div key={index}>
+                    <img
+                      style={styles.creatorProfilePic}
+                      src={profileImages[index] || "/default_profile_pic2.jpeg"}
+                      alt="creator profile picture"
+                    />
+                  </div>
+                </a>
+              ))}
+              {creators.length > 7 && (
+                <div className="more-creators" style={styles.moreCreators}>
+                  +{creators.length - 6}
+                </div>
+              )}
+            </div>
+          </footer>
+        </a>
       </div>
     </>
   );
