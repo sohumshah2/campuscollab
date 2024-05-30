@@ -16,11 +16,8 @@ export async function GET(request: NextRequest) {
     //   );
     // }
 
-    // Fetch the user's profile data
     const users = await prisma.user.findMany();
-    
 
-    
     // Return the user object with projects
     return NextResponse.json(users);
   } catch (error) {

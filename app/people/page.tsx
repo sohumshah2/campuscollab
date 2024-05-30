@@ -6,6 +6,8 @@ import Logo from "@/components/logo/logo";
 import Navbar from "@/components/navbar/navbar";
 import SearchBar from "@/components/peopleSearchBar/peopleSearchBar";
 
+export const dynamic = "force-dynamic";
+
 const Page = () => {
   const [peopleData, setPeopleData] = useState([]);
   const [filteredPeople, setFilteredPeople] = useState([]);
@@ -28,11 +30,14 @@ const Page = () => {
   }, []);
 
   const filterPeople = (query) => {
-    const queryList = query.split(',').map(q => q.trim().toLowerCase());
+    const queryList = query.split(",").map((q) => q.trim().toLowerCase());
 
-    const filteredResults = peopleData.filter(person => {
+    const filteredResults = peopleData.filter((person) => {
       const nameMatch = person.name.toLowerCase().includes(query.toLowerCase());
-      const tagMatch = person.selectedTechnologiesOptions.some(selectedTechnologiesOptions => queryList.includes(`#${selectedTechnologiesOptions.toLowerCase()}`));
+      const tagMatch = person.selectedTechnologiesOptions.some(
+        (selectedTechnologiesOptions) =>
+          queryList.includes(`#${selectedTechnologiesOptions.toLowerCase()}`)
+      );
 
       return nameMatch || tagMatch;
     });
@@ -51,7 +56,10 @@ const Page = () => {
             <div className={styles.profileImageContainer}>
               <a href={`/people/${person.username}`}>
                 <img
-                  src={person.profileImageUrl || "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"}
+                  src={
+                    person.profileImageUrl ||
+                    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                  }
                   alt={person.name}
                   className={styles.profileImage}
                 />
@@ -61,11 +69,13 @@ const Page = () => {
               <h2 className={styles.personName}>{person.name}</h2>
               <p className={styles.personBio}>{person.bio}</p>
               <div className={styles.tagsContainer}>
-                {person.selectedTechnologiesOptions.map((selectedTechnologiesOptions, tagIndex) => (
-                  <div key={tagIndex} className={styles.tag}>
-                    {selectedTechnologiesOptions}
-                  </div>
-                ))}
+                {person.selectedTechnologiesOptions.map(
+                  (selectedTechnologiesOptions, tagIndex) => (
+                    <div key={tagIndex} className={styles.tag}>
+                      {selectedTechnologiesOptions}
+                    </div>
+                  )
+                )}
               </div>
             </div>
           </div>
