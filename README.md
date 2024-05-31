@@ -13,7 +13,7 @@
 
 - **Event Discovery:**
   - View a comprehensive list of upcoming events nearby and relevant to your field.
-  - Easily RSVP to events to secure your spot
+  - Easily RSVP to events to secure your spot.
 
 - **Peer Search:**
   - Use advanced filters to find students with specific coding skills and technological expertise.
@@ -22,6 +22,14 @@
 - **Profile Building:**
   - Create a detailed profile showcasing your skills and experiences.
   - Highlight your project portfolio for potential collaborators to view.
+ 
+## Upcoming Enhancements
+- Add events to your personal calendar with a single click.
+- Integrate more tools for better project management and communication within teams.
+- Get personalised notifications about events that match your interests and field of study.
+- Introduce badges and rewards for active participation and successful project completions.
+- Allow students to endorse each other’s skills, adding credibility and encouraging peer recognition.
+
 
 ![Screenshot 2024-05-31 at 9 22 14 PM](https://github.com/sohumshah2/campuscollab/assets/106431572/80bb9ce7-8a39-485a-9fd3-985d35a75553)
 
