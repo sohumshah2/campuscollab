@@ -17,7 +17,7 @@
 
 - **Peer Search:**
   - Use advanced filters to find students with specific coding skills and technological expertise.
-  - View detailed profiles to learn about peers’ capabilities and past projects.
+  - View detailed profiles to learn more about peers’ capabilities and past projects.
 
 - **Profile Building:**
   - Create a detailed profile showcasing your skills and experiences.
