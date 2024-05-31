@@ -1,10 +1,27 @@
 # Campus Collab
 
 ## Key Features
-- Effortless creation and management of project listings for student collaboration
-- Comprehensive event discovery to find events nearby and stay updated on campus and virtual events
-- Advanced search to find peers with specific skills in coding and technologies
-- Profile building with detailed skillset showcasing and project portfolio
+- Effortless creation and management of project listings for student collaboration.
+- Comprehensive event discovery to find nearby events and stay updated on campus and virtual events.
+- Advanced search to find peers with specific skills in coding and technologies.
+- Profile building with detailed skillset showcasing and project portfolio.
+
+## Capabilities
+- **Project Management:**
+  - Easily create, edit, and manage project listings.
+  - Collaborate with other students on projects of interest.
+
+- **Event Discovery:**
+  - View a comprehensive list of upcoming events nearby and relevant to your field.
+  - RSVP to events and add them to your personal calendar.
+
+- **Peer Search:**
+  - Use advanced filters to find students with specific coding skills and technological expertise.
+  - View detailed profiles to learn about peers’ capabilities and past projects.
+
+- **Profile Building:**
+  - Create a detailed profile showcasing your skills and experiences.
+  - Highlight your project portfolio for potential collaborators to view.
 
 ![Screenshot 2024-05-31 at 9 22 14 PM](https://github.com/sohumshah2/campuscollab/assets/106431572/80bb9ce7-8a39-485a-9fd3-985d35a75553)
 
