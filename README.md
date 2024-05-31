@@ -13,7 +13,7 @@
 
 - **Event Discovery:**
   - View a comprehensive list of upcoming events nearby and relevant to your field.
-  - RSVP to events and add them to your personal calendar.
+  - Easily RSVP to events to secure your spot
 
 - **Peer Search:**
   - Use advanced filters to find students with specific coding skills and technological expertise.
