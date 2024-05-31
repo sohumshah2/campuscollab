@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Campus Collab
 
-## Getting Started
+## Key Features
+- Effortless creation and management of project listings for student collaboration.
+- Comprehensive event discovery to find nearby events and stay updated on campus and virtual events.
+- Advanced search to find peers with specific skills in coding and technologies.
+- Profile building with detailed skillset showcasing and project portfolio.
 
-First, run the development server:
+## Capabilities
+- **Project Management:**
+  - Easily create, edit, and manage project listings.
+  - Collaborate with other students on projects of interest.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Event Discovery:**
+  - View a comprehensive list of upcoming events nearby and relevant to your field.
+  - Easily RSVP to events to secure your spot.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Peer Search:**
+  - Use advanced filters to find students with specific coding skills and technological expertise.
+  - View detailed profiles to learn about peers’ capabilities and past projects.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Profile Building:**
+  - Create a detailed profile showcasing your skills and experiences.
+  - Highlight your project portfolio for potential collaborators to view.
+ 
+## Upcoming Enhancements
+- Add events to your personal calendar with a single click.
+- Integrate more tools for better project management and communication within teams.
+- Get personalised notifications about events that match your interests and field of study.
+- Introduce badges and rewards for active participation and successful project completions.
+- Allow students to endorse each other’s skills, adding credibility and encouraging peer recognition.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+![Screenshot 2024-05-31 at 9 22 14 PM](https://github.com/sohumshah2/campuscollab/assets/106431572/80bb9ce7-8a39-485a-9fd3-985d35a75553)
 
-To learn more about Next.js, take a look at the following resources:
+![Screenshot 2024-05-31 at 9 23 10 PM](https://github.com/sohumshah2/campuscollab/assets/106431572/fabab5e6-9ce5-40e2-bdcf-add922477d39)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+![Screenshot 2024-05-31 at 9 24 50 PM](https://github.com/sohumshah2/campuscollab/assets/106431572/a72feb2b-c8fc-4512-b880-ed4024c30591)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+![Screenshot 2024-05-31 at 9 23 58 PM](https://github.com/sohumshah2/campuscollab/assets/106431572/0e599b35-d381-4999-88d3-b2d1cbc7c227)
 
-## Deploy on Vercel
+![Screenshot 2024-05-31 at 9 25 50 PM](https://github.com/sohumshah2/campuscollab/assets/106431572/79f6b4ed-f117-4674-9bee-8f20e66aef3a)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Join CampusCollab today and be part of a thriving academic community where collaboration leads to success! 🚀
