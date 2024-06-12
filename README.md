@@ -42,3 +42,11 @@
 ![Screenshot 2024-05-31 at 9 25 50 PM](https://github.com/sohumshah2/campuscollab/assets/106431572/79f6b4ed-f117-4674-9bee-8f20e66aef3a)
 
 Join CampusCollab today and be part of a thriving academic community where collaboration leads to success! 🚀
+
+## Tech Stack
+- NextJS
+- HTML
+- CSS
+- MongoDB (for database)
+- JavaScript
+
