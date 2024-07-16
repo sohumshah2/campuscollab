@@ -1,4 +1,4 @@
-[Campus Collab]([campus-collab.vercel.app](https://campus-collab.vercel.app/projects/dashboard)).
+# Campus Collab
 
 ## Key Features
 - Effortless creation and management of project listings for student collaboration.
