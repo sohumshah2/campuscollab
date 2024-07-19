@@ -114,6 +114,7 @@ const Page = () => {
 
   // Does all the filtering of projects by giving the user query and project data
   const filterProjectsParams = (userQuery: UserQuery, projectData): void => {
+    console.log('userQuery: ', userQuery);
     let showFilteredResult = projectData;
     showFilteredResult = [];
 
@@ -123,12 +124,14 @@ const Page = () => {
       });
       const fuzzyResult = fuse.search(userQuery.title);
       showFilteredResult = fuzzyResult.map((obj) => obj.item);
+      console.log('showFilteredResult after fuzzy search', showFilteredResult);
     }
 
     // Set showFilteredResult to project Data if size is 0
     if (showFilteredResult.length === 0) {
       showFilteredResult = projectData;
     }
+    console.log('showFilteredResult: ', showFilteredResult);
     const filteredTagCreator = showFilteredResult.filter((project) => {
       let hasMatchingTag = userQuery.tags.every((tag) =>
         project.tags.includes(tag)
@@ -136,7 +139,7 @@ const Page = () => {
 
       // Check if any creator matches the creator list
       let hasMatchingCreator = userQuery.creators.every((creator) =>
-        project.creators.includes(creator)
+        project.teammates.includes(creator)
       );
 
       // If tags list empty, set to true.
