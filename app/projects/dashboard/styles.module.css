@@ -56,9 +56,10 @@
 
 .addProjectBtn {
   background-color: #F9C80E;
-  width: 300px;
-  height: 65px;
+  width: 12em;
+  height: 2.5em;
   border: none;
+  border-radius: 8px;
   font-size: 1.5em;
   transition: background-color 0.3s ease;
 }
@@ -78,3 +79,14 @@
 /* .plusIconSpan {
   margin-right: 5px,
 } */
+
+@media only screen and (max-width: 700px) {
+  /* Add your styles here */
+  .dashLogoContainer {
+    display: block;
+  }
+  .btnContainer {
+    margin-top: 5%;
+    margin-bottom: 5%;
+  }
+}
