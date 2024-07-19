@@ -5,7 +5,7 @@ import { Search } from 'react-bootstrap-icons';
 import { useRouter, usePathname } from 'next/navigation'
 
 interface searchBarProps {
-  filterSearch: () => void;
+  filterSearch: (query:string) => void;
 }
 
 const SearchBar: React.FC = ({ filterSearch }) => {
