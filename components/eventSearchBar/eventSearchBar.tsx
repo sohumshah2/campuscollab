@@ -44,7 +44,7 @@ const EventSearchBar: React.FC = ({ filterSearch }) => {
     <>
       <div style={styles.searchBarContainer}>
           <span style={styles.searchIcon}><Search/></span>
-          <input style={styles.searchInputBar} type='text' placeholder='Search by Event name' onChange={e => handleUserQuery(e.target.value)}/>
+          <input style={styles.searchInputBar} type='text' placeholder='Search by events by name ....' onChange={e => handleUserQuery(e.target.value)}/>
       </div>
     </>
   );
