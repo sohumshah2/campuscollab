@@ -3,7 +3,6 @@
 Campus Collab, was submitted as part of the DevSoc Starlight Showcase. 
 Starlight is a project showcase that celebrates all kinds of software projects being built by passionate developers at UNSW.
 
-![image](https://github.com/user-attachments/assets/8a184d41-b6b6-4c18-8b1d-d674aea89f71)
 https://devsoc.app/starlight
 
 ## Key Features
@@ -46,6 +45,8 @@ https://devsoc.app/starlight
 ![Screenshot 2024-05-31 at 9 23 58 PM](https://github.com/sohumshah2/campuscollab/assets/106431572/0e599b35-d381-4999-88d3-b2d1cbc7c227)
 
 ![Screenshot 2024-05-31 at 9 25 50 PM](https://github.com/sohumshah2/campuscollab/assets/106431572/79f6b4ed-f117-4674-9bee-8f20e66aef3a)
+
+![image](https://github.com/user-attachments/assets/8a184d41-b6b6-4c18-8b1d-d674aea89f71)
 
 Join CampusCollab today and be part of a thriving academic community where collaboration leads to success! 🚀
 
