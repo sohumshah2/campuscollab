@@ -3,8 +3,8 @@
 Campus Collab, was submitted as part of the DevSoc Starlight Showcase. 
 Starlight is a project showcase that celebrates all kinds of software projects being built by passionate developers at UNSW.
 
-https://campus-collab.vercel.app/
-https://devsoc.app/starlight
+- https://campus-collab.vercel.app/
+- https://devsoc.app/starlight
 
 ## Key Features
 - Effortless creation and management of project listings for student collaboration.
